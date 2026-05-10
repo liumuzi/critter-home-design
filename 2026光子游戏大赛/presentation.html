@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>虫虫装修｜光子游戏大赛展示页</title>
+    <style>
+      @font-face {
+        font-family: "Presentation Sans";
+        src: url("./assets/fonts/NotoSansCJKsc-subset-regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Presentation Sans";
+        src: url("./assets/fonts/NotoSansCJKsc-subset-bold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      :root {
+        color-scheme: dark;
+        --bg: #07110c;
+        --panel: rgba(11, 28, 21, 0.9);
+        --panel-soft: rgba(20, 47, 37, 0.82);
+        --line: rgba(180, 237, 177, 0.18);
+        --text: #f7f7ef;
+        --muted: #a7c3af;
+        --accent: #9be15d;
+        --accent-2: #46c2a2;
+        --warm: #f7b267;
+        --shadow: 0 24px 60px rgba(0, 0, 0, 0.36);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Presentation Sans", "Noto Sans CJK SC", "Inter", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(82, 146, 115, 0.2), transparent 32%),
+          linear-gradient(180deg, #102117 0%, var(--bg) 28%, #06100b 100%);
+        color: var(--text);
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+
+      .page {
+        width: min(1400px, calc(100vw - 40px));
+        margin: 0 auto;
+        padding: 32px 0 72px;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 12px;
+        z-index: 20;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+        padding: 14px 18px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(6, 16, 11, 0.72);
+        backdrop-filter: blur(14px);
+      }
+
+      .brand {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .topbar nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .topbar a,
+      .pill {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 12px;
+      }
+
+      .slides {
+        display: grid;
+        gap: 24px;
+      }
+
+      .slide {
+        position: relative;
+        overflow: hidden;
+        min-height: 92vh;
+        padding: 42px;
+        border: 1px solid var(--line);
+        border-radius: 32px;
+        background: linear-gradient(180deg, rgba(19, 40, 31, 0.94), rgba(9, 23, 17, 0.96));
+        box-shadow: var(--shadow);
+        page-break-after: always;
+      }
+
+      .slide:last-child {
+        page-break-after: auto;
+      }
+
+      .slide::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(155, 225, 93, 0.08), transparent 36%, rgba(70, 194, 162, 0.08));
+        pointer-events: none;
+      }
+
+      .eyebrow {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 18px;
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 30px;
+        height: 1px;
+        background: currentColor;
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      ul {
+        position: relative;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(44px, 6vw, 76px);
+        line-height: 1.02;
+        max-width: 9em;
+      }
+
+      h2 {
+        font-size: clamp(30px, 3.5vw, 44px);
+        line-height: 1.1;
+      }
+
+      h3 {
+        font-size: 20px;
+        line-height: 1.25;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.75;
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 28px;
+        align-items: end;
+        height: 100%;
+      }
+
+      .hero-copy {
+        display: grid;
+        gap: 22px;
+        align-content: center;
+      }
+
+      .hero-copy p {
+        max-width: 42em;
+      }
+
+      .meta,
+      .stats,
+      .grid-2,
+      .grid-3,
+      .roadmap,
+      .chapters,
+      .cards,
+      .quote-grid,
+      .evidence {
+        position: relative;
+        display: grid;
+        gap: 16px;
+      }
+
+      .meta,
+      .stats {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid-3,
+      .cards,
+      .quote-grid,
+      .evidence {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .panel,
+      .stat,
+      .stage,
+      .chapter,
+      .quote,
+      .evidence-card {
+        position: relative;
+        padding: 18px 20px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: var(--panel-soft);
+      }
+
+      .stat strong,
+      .panel strong,
+      .chapter strong,
+      .evidence-card strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--text);
+        font-size: 18px;
+      }
+
+      .hero-art {
+        position: relative;
+        display: grid;
+        align-content: end;
+        min-height: 540px;
+      }
+
+      .hero-art .frame {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: linear-gradient(180deg, rgba(17, 40, 30, 0.95), rgba(6, 17, 12, 0.95));
+      }
+
+      .hero-art .house {
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+      }
+
+      .floating {
+        position: absolute;
+        width: 34%;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: rgba(8, 22, 16, 0.92);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .floating.small-top {
+        top: 6%;
+        right: 0;
+      }
+
+      .floating.small-bottom {
+        bottom: 2%;
+        left: 3%;
+      }
+
+      .floating img {
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        padding: 14px;
+      }
+
+      .tagline {
+        display: inline-flex;
+        width: fit-content;
+        padding: 10px 14px;
+        border-radius: 16px;
+        background: rgba(247, 178, 103, 0.12);
+        color: #ffd4a3;
+        font-size: 14px;
+      }
+
+      .loop {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 26px;
+      }
+
+      .loop-step {
+        position: relative;
+        padding: 18px 16px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .loop-step span,
+      .kicker {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .loop-step strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 18px;
+      }
+
+      .timeline {
+        position: relative;
+        display: grid;
+        gap: 18px;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-left: 28px;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 12px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 6px rgba(155, 225, 93, 0.14);
+      }
+
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: 26px;
+        bottom: -18px;
+        width: 2px;
+        background: rgba(155, 225, 93, 0.18);
+      }
+
+      .timeline-item:last-child::after {
+        display: none;
+      }
+
+      .versus {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+        margin-top: 24px;
+      }
+
+      .versus .panel {
+        min-height: 100%;
+      }
+
+      .versus .panel strong {
+        margin-bottom: 12px;
+      }
+
+      .chapters {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        margin-top: 24px;
+      }
+
+      .chapter {
+        display: grid;
+        gap: 8px;
+      }
+
+      .chapter .num {
+        color: var(--accent-2);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .roadmap {
+        grid-template-columns: 1fr 1fr;
+        margin-top: 24px;
+      }
+
+      .stage ul {
+        margin-top: 12px;
+      }
+
+      .quote {
+        padding: 22px;
+      }
+
+      .quote p:first-child {
+        color: var(--text);
+        font-size: 22px;
+        line-height: 1.6;
+      }
+
+      .footer-note {
+        margin-top: 20px;
+        color: #cce7d5;
+        font-size: 15px;
+      }
+
+      @media (max-width: 980px) {
+        .slide {
+          min-height: auto;
+          padding: 28px;
+        }
+
+        .hero,
+        .grid-2,
+        .grid-3,
+        .cards,
+        .quote-grid,
+        .evidence,
+        .versus,
+        .roadmap,
+        .chapters,
+        .loop {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-art {
+          min-height: 420px;
+        }
+      }
+
+      @media print {
+        body {
+          background: #08130e;
+        }
+
+        .page {
+          width: auto;
+          padding: 0;
+        }
+
+        .topbar {
+          position: static;
+          margin: 0 0 18px;
+        }
+
+        .slide {
+          min-height: calc(100vh - 20px);
+          break-inside: avoid;
+          margin-bottom: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <div class="brand">虫虫装修 · 光子游戏大赛展示页</div>
+        <nav>
+          <a href="#cover">定位</a>
+          <a href="#flow">心流</a>
+          <a href="#loop">循环</a>
+          <a href="#systems">系统</a>
+          <a href="#content">内容</a>
+          <a href="#future">版本规划</a>
+        </nav>
+      </header>
+
+      <section class="slides">
+        <article class="slide" id="cover">
+          <div class="hero">
+            <div class="hero-copy">
+              <div class="eyebrow">Project Positioning</div>
+              <h1>家园装修 × 野外探索 × 小动物陪伴</h1>
+              <div class="tagline">一款把“紧张探索”与“温暖归家”做成完整心流的情感经营游戏</div>
+              <p>
+                《虫虫装修》以瓢虫主角的微观视角切入废墟世界：玩家在野外承担搜集、负重、撤离与追逐的决策压力，回到家园后再把资源转化为装修、合成与关系推进。评委第一眼要看到的，不是概念堆砌，而是成熟、统一、已经被验证的玩法闭环。
+              </p>
+              <div class="meta">
+                <div class="stat"><strong>核心体验</strong>紧张搜撤 → 放松装修 → 动物反馈 → 新目标</div>
+                <div class="stat"><strong>独特气质</strong>末日废墟里的微观庇护所，突出“供养感”与“归属感”</div>
+                <div class="stat"><strong>展示重点</strong>讲玩法如何互相咬合，而不是只讲未来蓝图</div>
+              </div>
+            </div>
+            <div class="hero-art">
+              <div class="frame">
+                <img class="house" src="../Art/TreeHouse.png" alt="虫虫装修家园场景概念图" />
+              </div>
+              <div class="floating small-top">
+                <img src="../Art/哥哥.png" alt="小动物角色立绘" />
+              </div>
+              <div class="floating small-bottom">
+                <img src="../Art/chest-open.png" alt="探索中获得的宝箱道具" />
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" id="flow">
+          <div class="eyebrow">Experience Rhythm</div>
+          <h2>一紧一松的体验结构，先让评委感受到“玩起来是什么感觉”</h2>
+          <div class="grid-2" style="margin-top: 24px; align-items: start;">
+            <div class="panel">
+              <strong>节奏主张</strong>
+              <p>
+                野外不是高门槛动作考验，而是逐步加压的决策场：平静探索、发现风险、短暂紧张、成功脱身后的放松。回到家园后，安全感、治愈感与成就感立刻接住玩家情绪，形成稳定而有记忆点的心流切换。
+              </p>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <h3>轻度紧张的野外</h3>
+                <p>搜箱、负重、巡逻敌人与撤离判断共同制造压力，失败更多来自取舍而非纯操作。</p>
+              </div>
+              <div class="timeline-item">
+                <h3>绝对安全的家园</h3>
+                <p>家园不产生失败惩罚，是装修、互动、合成和情绪回收的主舞台。</p>
+              </div>
+              <div class="timeline-item">
+                <h3>持续反馈的内部心流</h3>
+                <p>家具摆放、房间扩建、剧情解锁与小动物回应，驱动玩家反复回家、反复投入。</p>
+              </div>
+            </div>
+          </div>
+          <div class="quote-grid" style="margin-top: 24px;">
+            <div class="quote"><p>门外是静止的废墟，门内是生长的羁绊。</p></div>
+            <div class="quote"><p>用野外的惊险，换取满屋的欢笑。</p></div>
+            <div class="quote"><p>装修不是打分，而是把冰冷废墟一点点填满温度。</p></div>
+          </div>
+        </article>
+
+        <article class="slide" id="loop">
+          <div class="eyebrow">Core Loop</div>
+          <h2>一局到底在做什么：可重复，但不会变成机械重复</h2>
+          <p style="margin-top: 18px; max-width: 60em;">
+            演示版的目标是把“探索 → 回家 → 建造 → 被回应 → 再出发”讲清楚。这个循环同时承接系统成长、情绪回报与内容推进，因此既能支撑可玩性，也能支撑未来扩展。
+          </p>
+          <div class="loop">
+            <div class="loop-step"><span>01</span><strong>探索</strong><p>在遗迹中搜索宝箱、材料与家具。</p></div>
+            <div class="loop-step"><span>02</span><strong>取舍</strong><p>背包越满越危险，玩家判断何时继续、何时撤。</p></div>
+            <div class="loop-step"><span>03</span><strong>撤离</strong><p>带着风险回家，把一次冒险完整结算。</p></div>
+            <div class="loop-step"><span>04</span><strong>装修 / 合成</strong><p>资源进入工作台与家园空间，转成可见成长。</p></div>
+            <div class="loop-step"><span>05</span><strong>动物反馈</strong><p>关系、情绪、日记与剧情对玩家行为作出回应。</p></div>
+            <div class="loop-step"><span>06</span><strong>新目标</strong><p>房间扩建、任务解锁与装备成长推动下一轮探索。</p></div>
+          </div>
+          <div class="cards" style="margin-top: 24px;">
+            <div class="panel"><strong>工作台是中枢</strong><p>野外材料进入工作台，产出家具与成长选择，再反向影响探索策略。</p></div>
+            <div class="panel"><strong>家园占比足够高</strong><p>家园操作在单局中承担高权重，确保“回家”不是菜单切页，而是真正的主舞台。</p></div>
+            <div class="panel"><strong>反馈必须流畅</strong><p>前 10 分钟体验被明确设计为：接任务、采集、背包变满、回家制作、立刻收到反馈。</p></div>
+          </div>
+        </article>
+
+        <article class="slide" id="systems">
+          <div class="eyebrow">Two Pillars</div>
+          <h2>紧张感从哪里来，治愈感又从哪里成立</h2>
+          <div class="versus">
+            <div class="panel">
+              <span class="kicker">野外玩法</span>
+              <strong>难度来自决策压力，不是纯操作门槛</strong>
+              <ul>
+                <li>开箱搜寻需要时间，敌人巡逻不会暂停。</li>
+                <li>负重会降低速度、提高暴露风险，收益与安全性持续对冲。</li>
+                <li>玩家拥有隐身、地形绕行等破局方式，但核心仍是判断和取舍。</li>
+                <li>设计目标是“紧张 / 刺激”，而非“高频失败 / 坐牢”。</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <span class="kicker">家园玩法</span>
+              <strong>家园是情感中心，不是功能菜单</strong>
+              <ul>
+                <li>家园是绝对安全区，负责承接治愈、成就感与关系表达。</li>
+                <li>装修不是评分系统，而是通过家具与空间布置表达对角色的理解。</li>
+                <li>玩家被鼓励经常回家、替换家具、主动对话，并期待下一段剧情。</li>
+                <li>房间扩建、舒适值与任务解锁构成长线驱动力。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="evidence" style="margin-top: 24px;">
+            <div class="evidence-card"><strong>供养感</strong>最弱小的瓢虫，冒险带回家具与材料，只为让小动物们住得更好。</div>
+            <div class="evidence-card"><strong>庇护所反差</strong>外面是危机四伏的废土，屋内是暖黄色灯光与稳定陪伴。</div>
+            <div class="evidence-card"><strong>空间即关系</strong>每一件家具都可能成为角色记忆与反馈的锚点。</div>
+          </div>
+        </article>
+
+        <article class="slide">
+          <div class="eyebrow">Animal Companions</div>
+          <h2>小动物不是奖励机器，而是会变化、会回应的角色</h2>
+          <div class="grid-2" style="margin-top: 24px; align-items: center;">
+            <div class="panel">
+              <strong>关系建立方式</strong>
+              <ul>
+                <li>日常对话会参考家具摆放、主线进度、动物当日心情与玩家最近行为。</li>
+                <li>每只小动物拥有性格、偏好、愿望、信任阶段与可回顾的记忆。</li>
+                <li>信任任务、支线故事与心情日记共同组成“陪伴如何成立”的证据链。</li>
+                <li>随着关系推进，房间扩建、家具上限、剧情开放与日常行为都会变化。</li>
+              </ul>
+            </div>
+            <div class="panel" style="padding: 0; overflow: hidden;">
+              <img src="../Art/bridge.png" alt="废墟中的桥梁与探索氛围图" style="aspect-ratio: 4 / 3; object-fit: cover;" />
+            </div>
+          </div>
+          <div class="cards" style="margin-top: 24px;">
+            <div class="panel"><strong>哥哥</strong><p>外向、话多、行动派，用乐观把家撑起来，是情绪外放的反馈代表。</p></div>
+            <div class="panel"><strong>妹妹</strong><p>外表可靠、内里柔软，偏好“旧物发挥价值”，天然适合承接工作台与升级目标。</p></div>
+            <div class="panel"><strong>系统目标</strong><p>通过对话、送礼、日记、旅行信件与家具互动，把陪伴做成持续变化的生活感。</p></div>
+          </div>
+        </article>
+
+        <article class="slide" id="content">
+          <div class="eyebrow">Content Structure</div>
+          <h2>内容推进的骨架：已验证的章节结构 + 可持续扩展的任务层次</h2>
+          <div class="chapters">
+            <div class="chapter"><div class="num">序章</div><strong>危险的地方</strong><p>第一次进入野外，救下第一只水獭，把“带回一个生命”立住。</p></div>
+            <div class="chapter"><div class="num">第一章</div><strong>搭起第一个家</strong><p>做窝、补家具、开启第一次真正的采集循环。</p></div>
+            <div class="chapter"><div class="num">第二章</div><strong>接回第二只水獭</strong><p>探索压力上升，开始按照性格为角色定制房间。</p></div>
+            <div class="chapter"><div class="num">第三章+</div><strong>更多区域与关系网</strong><p>逐步开放新区域、新动物、新情绪高潮与更复杂的互动。</p></div>
+            <div class="chapter"><div class="num">长期价值</div><strong>任务分层接入</strong><p>主线、支线、信任任务、情绪任务并行提供短中长目标。</p></div>
+          </div>
+          <div class="roadmap">
+            <div class="stage">
+              <span class="kicker">当前版本</span>
+              <h3>已经可展示的内容</h3>
+              <ul>
+                <li>核心循环可玩，主线推进到第二章。</li>
+                <li>序章到前两章能证明“探索—回家—反馈”的体验成立。</li>
+                <li>主线玩法、家园规则边界与情绪节奏已经被验证。</li>
+              </ul>
+            </div>
+            <div class="stage">
+              <span class="kicker">未来版本</span>
+              <h3>按同一逻辑继续长大</h3>
+              <ul>
+                <li>后续章节持续推进，每章提供新目标、新情绪与新机制。</li>
+                <li>支线 / 信任 / 情绪任务按节奏接入，增加内容供给层次。</li>
+                <li>更多区域、小动物关系网络与成长资源系统逐步铺开。</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide">
+          <div class="eyebrow">AI Integration</div>
+          <h2>AI 的位置：服务体验，不喧宾夺主</h2>
+          <div class="grid-2" style="margin-top: 24px; align-items: start;">
+            <div class="panel">
+              <strong>为什么是加分项</strong>
+              <p>
+                AI 不负责替代核心规则，而是把“家具摆放、送礼、靠近、抚摸、移走家具”这些玩家行为，转化成角色能记住、会解释、有阶段差异的情绪反馈。玩家感知到的不是聊天功能，而是“我刚刚做的事被这个角色看见了”。
+              </p>
+            </div>
+            <div class="panel">
+              <strong>为什么可控</strong>
+              <ul>
+                <li>规则与模拟层独立成立，AI 只是叙事与表达增强层。</li>
+                <li>输入来自结构化状态、短期记忆与世界事件，而不是自由闲聊。</li>
+                <li>生成、校验、重试与模板兜底保证结果稳定且可降级。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="quote-grid" style="margin-top: 24px;">
+            <div class="quote"><p>玩家只需要专注于玩游戏，AI 在后台把行为转成情感反馈。</p></div>
+            <div class="quote"><p>同一件家具，在不同关系阶段会拥有不同的回应与记忆。</p></div>
+            <div class="quote"><p>目标不是“让 AI 多说话”，而是让陪伴真正变得动人。</p></div>
+          </div>
+        </article>
+
+        <article class="slide" id="future">
+          <div class="eyebrow">Closing</div>
+          <h2>为什么这套设计有潜力：熟悉框架 + 系统结合创新</h2>
+          <div class="cards" style="margin-top: 24px;">
+            <div class="panel"><strong>上手门槛低</strong><p>探索、装修、成长、任务这些模块都足够熟悉，玩家能快速理解玩法目标。</p></div>
+            <div class="panel"><strong>系统咬合紧</strong><p>每次探索都为下一次家园表达、关系推进与内容解锁打开选择空间。</p></div>
+            <div class="panel"><strong>扩展方向清晰</strong><p>沿着同一玩法逻辑继续增加章节、区域与角色，就能稳定放大体验而不失真。</p></div>
+          </div>
+          <div class="panel" style="margin-top: 24px;">
+            <strong>收尾三句</strong>
+            <ul>
+              <li>我们已经完成核心体验验证。</li>
+              <li>我们有完整而连贯的内容设计。</li>
+              <li>我们会沿着同一玩法逻辑，把这个世界持续做大。</li>
+            </ul>
+          </div>
+          <p class="footer-note">建议导出 PDF 时保留分节分页：每个 section 都按 PPT 单页逻辑设计，可直接打印或另存为 PDF。</p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
