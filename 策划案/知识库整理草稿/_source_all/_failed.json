@@ -1,0 +1,20 @@
+﻿[
+    {
+        "title":  "任务系统（2.13）",
+        "token":  "Etq5dVozIokpPlxX17Ocf9BTng0",
+        "path":  "戴夫like（光子大赛）/文档垃圾站/任务系统（2.13）",
+        "error":  "{\n  \"ok\": false,\n  \"identity\": \"user\",\n  \"error\": {\n    \"type\": \"api\",\n    \"subtype\": \"rate_limit\",\n    \"code\": 99991400,\n    \"message\": \"request trigger frequency limit\",\n    \"log_id\": \"202607131850586AEB749DBD31EAE51DF8\",\n    \"troubleshooter\": \"排查建议查看(Troubleshooting suggestions): https://open.feishu.cn/search?from=openapi\u0026log_id=202607131850586AEB749DBD31EAE51DF8\u0026code=99991400\u0026method_id=7624117956138650561\",\n    \"retryable\": true\n  }\n}"
+    },
+    {
+        "title":  "任务系统（完整主线任务）",
+        "token":  "PBuDdrj5XofqzWxI30UcsDYbntf",
+        "path":  "戴夫like（光子大赛）/文档垃圾站/任务系统（完整主线任务）",
+        "error":  "{\n  \"ok\": false,\n  \"identity\": \"user\",\n  \"error\": {\n    \"type\": \"api\",\n    \"subtype\": \"rate_limit\",\n    \"code\": 99991400,\n    \"message\": \"request trigger frequency limit\",\n    \"log_id\": \"20260713185059E369D8891542A4E22B24\",\n    \"troubleshooter\": \"排查建议查看(Troubleshooting suggestions): https://open.feishu.cn/search?from=openapi\u0026log_id=20260713185059E369D8891542A4E22B24\u0026code=99991400\u0026method_id=7624117956138650561\",\n    \"retryable\": true\n  }\n}"
+    },
+    {
+        "title":  "饰品设置0.5",
+        "token":  "ZFy1d3QZ6oOGePxvYphcpCN1nch",
+        "path":  "戴夫like（光子大赛）/文档垃圾站/饰品设置0.5",
+        "error":  "{\n  \"ok\": false,\n  \"identity\": \"user\",\n  \"error\": {\n    \"type\": \"api\",\n    \"subtype\": \"rate_limit\",\n    \"code\": 99991400,\n    \"message\": \"request trigger frequency limit\",\n    \"log_id\": \"20260713185059552A0AA06A2882CA9C95\",\n    \"troubleshooter\": \"排查建议查看(Troubleshooting suggestions): https://open.feishu.cn/search?from=openapi\u0026log_id=20260713185059552A0AA06A2882CA9C95\u0026code=99991400\u0026method_id=7624117956138650561\",\n    \"retryable\": true\n  }\n}"
+    }
+]
