@@ -1,0 +1,27 @@
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Large binary files
+*.mp4
+*.zip
+*.pdf
+*.docx
+*.pptx
+*.ttf
+*.woff2
+
+# IDE / Editor
+.vscode/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Downloaded tools / binaries
+tools/ffmpeg*/
+tools/*.zip
