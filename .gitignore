@@ -25,3 +25,4 @@ Thumbs.db
 # Downloaded tools / binaries
 tools/ffmpeg*/
 tools/*.zip
+output
