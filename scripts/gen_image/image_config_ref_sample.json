@@ -1,0 +1,15 @@
+{
+    "model": "google/gemini-3.1-flash-image",
+    "prompt": "Transform this scene into a cozy watercolor painting style, warm tones, children's book illustration, keep the same composition and character positions",
+    "n": 1,
+    "aspect_ratio": "16:9",
+    "resolution": "1K",
+    "output_format": "png",
+    "input_references": [
+        {
+            "file": "../assets/images/reference_sketch.png"
+        }
+    ],
+    "output_dir": "../output/images",
+    "output_prefix": "style_transfer"
+}

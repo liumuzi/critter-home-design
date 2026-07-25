@@ -1,0 +1,14 @@
+{
+    "model": "openai/gpt-image-1",
+    "aspect_ratio": "16:9",
+    "resolution": "2K",
+    "output_format": "png",
+    "input_references": [
+        {
+            "file": "../../assets/images/cover_art_0.5x.png"
+        }
+    ],
+    "output_dir": "../../output/images/slide_bg",
+    "output_prefix": "bg_light_cool_texture",
+    "prompt": "A completely blank, light-toned paper-textured surface for use as a slide background. The texture should share the same handmade craft paper feel as the reference — subtle grain and delicate fiber texture. The color is a clean soft cool-toned ivory: imagine fresh eggshell white with a whisper of cool morning light, like a pristine sheet of high-quality paper under gentle overcast daylight. Not warm yellow-cream, not cold sterile white, not gray — just a fresh, airy, slightly cool ivory that feels clean and modern. Absolutely no patterns, no decorative elements, no objects, no characters, no text. Uniformly textured from edge to edge, like a blank page that belongs to the same visual world as the reference image."
+}

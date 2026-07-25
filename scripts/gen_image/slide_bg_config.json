@@ -1,0 +1,14 @@
+{
+    "model": "google/gemini-3.1-flash-image",
+    "aspect_ratio": "16:9",
+    "resolution": "2K",
+    "output_format": "png",
+    "input_references": [
+        {
+            "file": "../../assets/images/cover_art_0.5x.png"
+        }
+    ],
+    "output_dir": "../../output/images/slide_bg",
+    "output_prefix": "bg_pure_texture",
+    "prompt": "A completely blank warm-toned paper-textured surface for use as a slide background. Imagine a sheet of handmade craft paper with subtle grain and fiber texture, colored in soft pastel hues — warm peach, cream, light butter yellow, and muted dusty coral blending gently across the surface like natural handmade paper. Absolutely no patterns, no decorative elements, no objects, no characters, no text. Just pure, clean paper texture with a warm, cozy, inviting feel. The image is uniformly textured from edge to edge, like an empty canvas ready to receive content."
+}

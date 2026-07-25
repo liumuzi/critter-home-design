@@ -1,0 +1,11 @@
+{
+    "model": "google/gemini-3.1-flash-image",
+    "prompt": "A cozy cartoon-style living room for cute insects, warm lighting, hand-drawn watercolor feel, children's book illustration style, wooden furniture, tiny mushroom decorations, a ladybug sitting on a leaf sofa",
+    "n": 1,
+    "aspect_ratio": "16:9",
+    "resolution": "1K",
+    "quality": "high",
+    "output_format": "png",
+    "output_dir": "../output/images",
+    "output_prefix": "living_room_concept"
+}
