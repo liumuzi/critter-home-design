@@ -1,0 +1,232 @@
+\documentclass[UTF8,fontset=none,zihao=5,twoside]{ctexart}
+
+% This template is intentionally self-contained so the generated .tex can be
+% archived or compiled without Pandoc's default template files.
+\usepackage[a4paper,top=19mm,bottom=22mm,inner=24mm,outer=18mm,headheight=14pt,headsep=7mm,footskip=12mm]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{etoolbox}
+\usepackage{needspace}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{ragged2e}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\usepackage{colortbl}
+\usepackage{xurl}
+\usepackage[unicode,colorlinks=true,linkcolor=BrandBlue,urlcolor=Accent,citecolor=BrandBlue,pdfborder={0 0 0}]{hyperref}
+\usepackage{bookmark}
+
+\definecolor{BrandBlue}{HTML}{214E5B}
+\definecolor{BrandDeep}{HTML}{173640}
+\definecolor{Accent}{HTML}{C66A3D}
+\definecolor{WarmPaper}{HTML}{F7F4EE}
+\definecolor{TableHeader}{HTML}{DCE8E9}
+\definecolor{TableAlt}{HTML}{F4F7F6}
+\definecolor{BodyText}{HTML}{263238}
+\definecolor{MutedText}{HTML}{66757A}
+\definecolor{RuleGray}{HTML}{CBD4D5}
+
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+% Static Windows fonts avoid the xdvipdfmx failure triggered by the locally
+% installed Noto variable-font files while remaining suitable for print.
+\setCJKmainfont[AutoFakeBold=2]{STSong}
+\setCJKsansfont[AutoFakeBold=2]{Microsoft YaHei}
+\setCJKmonofont{Microsoft YaHei}
+\newCJKfontfamily\displaycjk[AutoFakeBold=2]{Microsoft YaHei}
+
+\color{BodyText}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.34em plus 0.08em minus 0.05em}
+\linespread{1.28}
+\setlength{\emergencystretch}{2em}
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+
+\setlist[itemize]{leftmargin=2.1em,itemsep=0.24em,topsep=0.35em,parsep=0pt}
+\setlist[enumerate]{leftmargin=2.25em,itemsep=0.28em,topsep=0.35em,parsep=0pt}
+\renewcommand{\labelitemi}{\textcolor{Accent}{\small\textbullet}}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0.2em}\setlength{\parskip}{0pt}%
+}
+
+\titleformat{\section}
+  {\displaycjk\bfseries\fontsize{18}{24}\selectfont\color{BrandDeep}}
+  {}{0pt}
+  {\raisebox{-1.8mm}{\color{BrandBlue}\rule{3.2mm}{9mm}}\hspace{3mm}}
+  [\vspace{2mm}{\color{Accent}\titlerule[1.2pt]}]
+\titlespacing*{\section}{0pt}{0pt}{5mm}
+
+\titleformat{name=\section,numberless}
+  {\displaycjk\bfseries\fontsize{22}{28}\selectfont\color{BrandDeep}\centering}
+  {}{0pt}{}
+  [\vspace{2mm}{\color{Accent}\titlerule[1.2pt]}]
+
+\titleformat{\subsection}
+  {\displaycjk\bfseries\fontsize{13.5}{18}\selectfont\color{BrandBlue}}
+  {}{0pt}{}
+\titlespacing*{\subsection}{0pt}{4.5mm}{2mm}
+
+\titleformat{\subsubsection}
+  {\displaycjk\bfseries\fontsize{11.5}{15}\selectfont\color{BrandDeep}}
+  {}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{3.5mm}{1.5mm}
+
+% Keep a chapter heading with a useful amount of following content. This gives
+% clear chapter starts without wasting a nearly empty sheet on short chapters.
+\pretocmd{\section}{\Needspace{0.32\textheight}}{}{}
+
+\titlecontents{section}
+  [0pt]
+  {\addvspace{0.75em}\displaycjk\bfseries\color{BrandDeep}}
+  {}
+  {}
+  {\titlerule*[0.6pc]{.}\contentspage}
+\titlecontents{subsection}
+  [2.6em]
+  {\small\color{MutedText}}
+  {}
+  {}
+  {\titlerule*[0.6pc]{.}\contentspage}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\sffamily\color{MutedText}《虫虫家装》商业计划书}
+\fancyhead[RO]{\small\sffamily\color{MutedText}\nouppercase{\leftmark}}
+\fancyfoot[LE,RO]{\sffamily\color{BrandBlue}\bfseries 第\,\thepage\,页}
+\fancyfoot[LO,RE]{\scriptsize\sffamily\color{MutedText}2026 南山创业之星 · 半决赛打印版}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\makeatletter
+\renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
+\makeatother
+
+\setlength{\LTpre}{0.65em}
+\setlength{\LTpost}{0.8em}
+% Pandoc labels captionless longtables as type "none". Hyperref expects a
+% matching counter even when no caption is printed.
+\newcounter{none}
+\setlength{\tabcolsep}{4.5pt}
+\renewcommand{\arraystretch}{1.42}
+\arrayrulecolor{RuleGray}
+\newenvironment{BusinessTable}{%
+  \begingroup
+  \small
+  \setlength{\parindent}{0pt}%
+  \setlength{\parskip}{0pt}%
+  \rowcolors{2}{TableAlt}{white}%
+}{%
+  \endgroup
+}
+
+\renewenvironment{quote}{%
+  \begin{tcolorbox}[
+    enhanced,
+    breakable,
+    colback=WarmPaper,
+    colframe=Accent,
+    boxrule=0pt,
+    leftrule=2.2pt,
+    arc=0pt,
+    left=4mm,right=4mm,top=2.7mm,bottom=2.7mm,
+    before skip=0.7em,after skip=0.8em
+  ]
+  \setlength{\parindent}{0pt}\color{BrandDeep}
+}{%
+  \end{tcolorbox}
+}
+
+\newcommand{\CoverMetric}[2]{%
+  \begin{minipage}[t][24mm][c]{0.285\linewidth}
+    \centering
+    {\displaycjk\bfseries\fontsize{19}{22}\selectfont\color{BrandBlue}#1\par}
+    \vspace{1.5mm}
+    {\sffamily\small\color{MutedText}#2\par}
+  \end{minipage}%
+}
+
+\newcommand{\MakeBusinessCover}{%
+  \begin{titlepage}
+    \thispagestyle{empty}
+    \noindent{\color{Accent}\rule{19mm}{2.3pt}}\par
+    \vspace{9mm}
+    {\sffamily\bfseries\fontsize{11}{14}\selectfont\color{Accent}\MakeUppercase{2026 NEXT STAR · SEMIFINAL}\par}
+    \vspace{17mm}
+    {\displaycjk\bfseries\fontsize{36}{45}\selectfont\color{BrandDeep}《虫虫家装》\par}
+    \vspace{2mm}
+    {\displaycjk\bfseries\fontsize{25}{34}\selectfont\color{BrandBlue}商业计划书\par}
+    \vspace{8mm}
+    \noindent{\color{RuleGray}\rule{\textwidth}{0.7pt}}\par
+    \vspace{8mm}
+    {\displaycjk\fontsize{15}{23}\selectfont\color{BrandDeep}
+      去危险的废墟搜集，\par
+      把破木屋装成末世最幸福的家。\par}
+    \vfill
+    \begin{tcolorbox}[
+      enhanced,
+      colback=WarmPaper,
+      colframe=WarmPaper,
+      boxrule=0pt,
+      arc=1.5mm,
+      left=5mm,right=5mm,top=5mm,bottom=5mm
+    ]
+      \CoverMetric{300万元}{天使轮融资目标}
+      \hfill{\color{RuleGray}\rule[-7mm]{0.5pt}{18mm}}\hfill
+      \CoverMetric{7人}{覆盖主要研发职能}
+      \hfill{\color{RuleGray}\rule[-7mm]{0.5pt}{18mm}}\hfill
+      \CoverMetric{2028 Q1}{Steam 全球首发目标}
+    \end{tcolorbox}
+    \vspace{12mm}
+    \begin{minipage}{0.58\textwidth}
+      \sffamily\small\color{MutedText}
+      参赛：2026 南山创业之星半决赛\\[1.8mm]
+      阶段：可玩 Demo 与垂直切片开发中\\[1.8mm]
+      版本：2026 年 8 月 19 日
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.34\textwidth}
+      \raggedleft
+      {\displaycjk\bfseries\large\color{BrandBlue}虫虫家装团队\par}
+      \vspace{1mm}
+      {\sffamily\scriptsize\color{MutedText}面向全球 Steam 玩家\par}
+    \end{minipage}
+  \end{titlepage}
+}
+
+\hypersetup{
+  pdftitle={《虫虫家装》商业计划书},
+  pdfauthor={虫虫家装团队},
+  pdfsubject={2026南山创业之星半决赛},
+  pdfkeywords={虫虫家装, 商业计划书, 独立游戏, Steam}
+}
+
+\begin{document}
+
+\hypersetup{pageanchor=false}
+\MakeBusinessCover
+
+\pagenumbering{Roman}
+\pagestyle{plain}
+\hypersetup{pageanchor=true}
+\tableofcontents
+\clearpage
+
+\pagenumbering{arabic}
+\pagestyle{fancy}
+$body$
+
+\end{document}
