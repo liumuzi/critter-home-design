@@ -11,11 +11,19 @@ $templatePath = Join-Path $scriptRoot 'business-plan-template.tex'
 $filterPath = Join-Path $scriptRoot 'print-layout.lua'
 $texPath = Join-Path $scriptRoot '虫虫家装_商业计划书_半决赛.tex'
 $pdfPath = Join-Path $scriptRoot '虫虫家装_商业计划书_半决赛.pdf'
-$temporaryMarkdown = Join-Path $scriptRoot '.business-plan-body.md'
+
+# IDE terminals and activated virtual environments can retain the PATH value
+# from before Pandoc/MiKTeX was installed. Merge the latest registered Windows
+# paths without dropping the active virtual-environment entries.
+$registeredPaths = @(
+    [Environment]::GetEnvironmentVariable('Path', 'Machine')
+    [Environment]::GetEnvironmentVariable('Path', 'User')
+) -join [IO.Path]::PathSeparator
+$env:Path = @($env:Path, $registeredPaths) -join [IO.Path]::PathSeparator
 
 foreach ($requiredCommand in @('pandoc', 'latexmk', 'xelatex')) {
     if (-not (Get-Command $requiredCommand -ErrorAction SilentlyContinue)) {
-        throw "缺少构建命令：$requiredCommand。请先安装 Pandoc 与包含 XeLaTeX/latexmk 的 TeX Live。"
+        throw "缺少构建命令：$requiredCommand。请安装 Pandoc，以及包含 XeLaTeX/latexmk 的 MiKTeX 或 TeX Live。"
     }
 }
 
@@ -25,49 +33,33 @@ foreach ($requiredFile in @($sourceMarkdown, $templatePath, $filterPath)) {
     }
 }
 
-$sourceLines = Get-Content -LiteralPath $sourceMarkdown -Encoding UTF8
-$separatorIndex = [Array]::IndexOf($sourceLines, '---')
-if ($separatorIndex -lt 0 -or $separatorIndex -ge ($sourceLines.Count - 1)) {
-    throw '未找到封面信息后的 Markdown 分隔线，无法可靠提取正文。'
-}
-
-$bodyLines = $sourceLines[($separatorIndex + 1)..($sourceLines.Count - 1)]
-[System.IO.File]::WriteAllLines($temporaryMarkdown, $bodyLines, [System.Text.UTF8Encoding]::new($false))
-
-try {
-    & pandoc $temporaryMarkdown `
+& pandoc $sourceMarkdown `
         --from='gfm' `
         --to='latex' `
         --standalone `
         --template=$templatePath `
         --lua-filter=$filterPath `
-        --shift-heading-level-by=-1 `
         --wrap='none' `
-        --output=$texPath
+    --output=$texPath
 
+if ($LASTEXITCODE -ne 0) {
+    throw "Pandoc 转换失败，退出码：$LASTEXITCODE"
+}
+
+Push-Location $scriptRoot
+try {
+    & latexmk -xelatex -interaction=nonstopmode -halt-on-error -file-line-error (Split-Path -Leaf $texPath)
     if ($LASTEXITCODE -ne 0) {
-        throw "Pandoc 转换失败，退出码：$LASTEXITCODE"
+        throw "XeLaTeX 编译失败，退出码：$LASTEXITCODE"
     }
 
-    Push-Location $scriptRoot
-    try {
-        & latexmk -xelatex -interaction=nonstopmode -halt-on-error -file-line-error (Split-Path -Leaf $texPath)
-        if ($LASTEXITCODE -ne 0) {
-            throw "XeLaTeX 编译失败，退出码：$LASTEXITCODE"
-        }
-
-        if (-not $KeepBuildFiles) {
-            & latexmk -c (Split-Path -Leaf $texPath) | Out-Null
-        }
-    }
-    finally {
-        Pop-Location
+    if (-not $KeepBuildFiles) {
+        & latexmk -c (Split-Path -Leaf $texPath) | Out-Null
     }
 }
 finally {
-    Remove-Item -LiteralPath $temporaryMarkdown -Force -ErrorAction SilentlyContinue
+    Pop-Location
 }
-
 if (-not (Test-Path -LiteralPath $pdfPath -PathType Leaf)) {
     throw "构建完成但未找到 PDF：$pdfPath"
 }

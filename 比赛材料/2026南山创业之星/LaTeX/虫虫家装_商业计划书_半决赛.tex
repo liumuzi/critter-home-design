@@ -33,8 +33,8 @@
 \definecolor{WarmPaper}{HTML}{F7F4EE}
 \definecolor{TableHeader}{HTML}{DCE8E9}
 \definecolor{TableAlt}{HTML}{F4F7F6}
-\definecolor{BodyText}{HTML}{263238}
-\definecolor{MutedText}{HTML}{66757A}
+\definecolor{BodyText}{HTML}{202C30}
+\definecolor{MutedText}{HTML}{596A70}
 \definecolor{RuleGray}{HTML}{CBD4D5}
 
 \defaultfontfeatures{Ligatures=TeX}
@@ -49,9 +49,13 @@
 \newCJKfontfamily\displaycjk[AutoFakeBold=2]{Microsoft YaHei}
 
 \color{BodyText}
+% Section numbers are authored explicitly in Markdown (一、2.1、附录 A, etc.).
+% Disable LaTeX's counters so the table of contents does not add a second,
+% conflicting number such as 9.1.1 to appendix headings.
+\setcounter{secnumdepth}{-1}
 \setlength{\parindent}{2em}
-\setlength{\parskip}{0.34em plus 0.08em minus 0.05em}
-\linespread{1.28}
+\setlength{\parskip}{0.38em plus 0.08em minus 0.05em}
+\linespread{1.32}
 \setlength{\emergencystretch}{2em}
 \widowpenalty=10000
 \clubpenalty=10000
@@ -65,19 +69,14 @@
 }
 
 \titleformat{\section}
-  {\displaycjk\bfseries\fontsize{18}{24}\selectfont\color{BrandDeep}}
+  {\displaycjk\bfseries\fontsize{16.5}{22}\selectfont\color{BrandDeep}}
   {}{0pt}
   {\raisebox{-1.8mm}{\color{BrandBlue}\rule{3.2mm}{9mm}}\hspace{3mm}}
-  [\vspace{2mm}{\color{Accent}\titlerule[1.2pt]}]
-\titlespacing*{\section}{0pt}{0pt}{5mm}
-
-\titleformat{name=\section,numberless}
-  {\displaycjk\bfseries\fontsize{22}{28}\selectfont\color{BrandDeep}\centering}
-  {}{0pt}{}
-  [\vspace{2mm}{\color{Accent}\titlerule[1.2pt]}]
+  [\vspace{1.5mm}{\color{Accent}\titlerule[0.9pt]}]
+\titlespacing*{\section}{0pt}{1mm}{4.5mm}
 
 \titleformat{\subsection}
-  {\displaycjk\bfseries\fontsize{13.5}{18}\selectfont\color{BrandBlue}}
+  {\displaycjk\bfseries\fontsize{12.5}{17}\selectfont\color{BrandBlue}}
   {}{0pt}{}
 \titlespacing*{\subsection}{0pt}{4.5mm}{2mm}
 
@@ -121,7 +120,7 @@
 % matching counter even when no caption is printed.
 \newcounter{none}
 \setlength{\tabcolsep}{4.5pt}
-\renewcommand{\arraystretch}{1.42}
+\renewcommand{\arraystretch}{1.34}
 \arrayrulecolor{RuleGray}
 \newenvironment{BusinessTable}{%
   \begingroup
@@ -131,6 +130,62 @@
   \rowcolors{2}{TableAlt}{white}%
 }{%
   \endgroup
+}
+
+\newtcolorbox{BusinessCallout}{
+  enhanced,
+  breakable,
+  colback=WarmPaper!72!white,
+  colframe=RuleGray,
+  boxrule=0pt,
+  borderline west={2.2pt}{0pt}{Accent},
+  arc=1.2mm,
+  left=4mm,right=4mm,top=3mm,bottom=3mm,
+  before skip=0.8em,after skip=0.9em,
+  fontupper=\displaycjk\bfseries\color{BrandDeep}
+}
+
+\newcommand{\SummaryPoint}[2]{%
+  \begin{tcolorbox}[
+    enhanced,
+    colback=WarmPaper!58!white,
+    colframe=RuleGray,
+    boxrule=0.35pt,
+    borderline west={2.4pt}{0pt}{Accent},
+    arc=1mm,
+    left=4mm,right=4mm,top=2.4mm,bottom=2.4mm,
+    before skip=0.45em,after skip=0.45em
+  ]
+  \setlength{\parindent}{0pt}%
+  {\displaycjk\bfseries\color{BrandBlue}#1}\par
+  \vspace{0.5mm}{\color{BodyText}#2}
+  \end{tcolorbox}%
+}
+
+\newcommand{\TimelineEntry}[5]{%
+  \begin{tcolorbox}[
+    enhanced,
+    breakable,
+    colback=WarmPaper!32!white,
+    colframe=white,
+    boxrule=0pt,
+    borderline west={1.6pt}{0pt}{BrandBlue},
+    arc=0mm,
+    left=5mm,right=3mm,top=4.5mm,bottom=3mm,
+    before skip=0.9em,after skip=0.9em,
+    title={#1},
+    colbacktitle=white,
+    coltitle=BrandDeep,
+    fonttitle=\displaycjk\bfseries\normalsize,
+    attach boxed title to top left={xshift=3mm,yshift=-2.1mm},
+    boxed title style={boxrule=0pt,arc=0mm,left=2mm,right=2mm,top=0.8mm,bottom=0.8mm}
+  ]
+  \setlength{\parindent}{0pt}%
+  \textcolor{Accent}{\displaycjk\bfseries 研发交付}\quad #2\par\smallskip
+  \textcolor{Accent}{\displaycjk\bfseries 市场发行}\quad #3\par\smallskip
+  \textcolor{Accent}{\displaycjk\bfseries 组织落地}\quad #4\par\smallskip
+  \textcolor{BrandBlue}{\displaycjk\bfseries 验证价值}\quad #5
+  \end{tcolorbox}%
 }
 
 \renewenvironment{quote}{%
@@ -185,9 +240,9 @@
       left=5mm,right=5mm,top=5mm,bottom=5mm
     ]
       \CoverMetric{300万元}{天使轮融资目标}
-      \hfill{\color{RuleGray}\rule[-7mm]{0.5pt}{18mm}}\hfill
-      \CoverMetric{7人}{覆盖主要研发职能}
-      \hfill{\color{RuleGray}\rule[-7mm]{0.5pt}{18mm}}\hfill
+      \hfill{\color{RuleGray}\rule[-17mm]{0.5pt}{21mm}}\hfill
+      \CoverMetric{8人}{覆盖主要研发职能}
+      \hfill{\color{RuleGray}\rule[-17mm]{0.5pt}{21mm}}\hfill
       \CoverMetric{2028 Q1}{Steam 全球首发目标}
     \end{tcolorbox}
     \vspace{12mm}
@@ -227,61 +282,43 @@
 
 \pagenumbering{arabic}
 \pagestyle{fancy}
-\section{一、执行摘要}\label{ux4e00ux6267ux884cux6458ux8981}
+\section{一、执行摘要：项目概况与投资摘要}\label{ux4e00ux6267ux884cux6458ux8981ux9879ux76eeux6982ux51b5ux4e0eux6295ux8d44ux6458ux8981}
 
 《虫虫家装》是一款面向全球Steam玩家的休闲冒险游戏。玩家扮演一只瓢虫，在人类消失后的末日森林中探索废墟、搜集资源、躲避变异植物，再把带回家的材料和家具用于改造小动物们共同生活的避难所。随着探索深入，玩家将结识并帮助更多小动物，从人类遗迹和它们的记忆中发现线索，逐步拼凑这个世界的过去。
 
-项目的核心体验围绕一条连续动机链展开：小动物提出心愿，玩家进入危险废墟寻找对应家具和材料，在风险上升前判断继续探索还是安全撤离，回家后把收获用于装修和关系推进。野外制造稀缺与取舍，家园兑现成果与情感，AI 记忆把玩家的付出沉淀为可被伙伴回应的共同经历。
+项目的核心体验围绕一条连续动机链展开：小动物提出心愿，玩家进入危险废墟寻找对应家具和材料，在风险上升前判断继续探索还是安全撤离，回家后把收获用于装修和关系推进。野外制造稀缺与取舍，家园兑现成果与情感，AI记忆把玩家的付出沉淀为可被伙伴回应的共同经历。
 
 当前项目已完成用于展会和定向测试的可玩Demo，核心双循环和AI情感反馈原型已跑通，并获2026光子游戏大赛概念赛道银奖。一轮展会及定向试玩共回收19份有效问卷，玩家对装修内容、野外体验与同类价格购买均呈正向反馈，数据口径见附录C。下一阶段将扩大试玩至100---300名目标玩家，结合Steam愿望单、Demo完成率、重复启动率和价格测试验证市场接受度。
 
-团队由程序、策划、美术、动画、概念设计、UI/UX和音频成员组成，已经完成从概念开发到展会试玩的阶段性交付。项目计划2026年12月完成垂直切片，2027年依次完成Alpha和Beta，2028年Q1在Steam首发。本轮融资300万元，按研发里程碑分三阶段拨付，用于覆盖2026年Q4至2028年Q2共21个月的研发、发行及首发后3个月维护。
+团队由2名专注投入的创始成员和6名阶段成员组成，覆盖程序、策划、美术、动画、概念设计、UI/UX和音频，已经完成从概念开发到展会试玩的阶段性交付。项目计划2026年12月完成垂直切片，2027年依次完成Alpha和Beta，2028年Q1在Steam首发。本轮融资300万元，按研发里程碑分三阶段拨付，用于覆盖2026年Q4至2028年Q2共21个月的研发、发行及首发后3个月维护。
 
 基准经营情景为首发12个月销售15万套。按每套平均含税成交额80元测算，消费者支付总额1,200万元，平台费后回款（税前）840万元，预计项目累计经营现金净额约400万元。该情景以相邻产品量级为参照，团队将根据愿望单、Demo行为和发行数据逐阶段校准，并按验证结果释放增长预算。
 
 \subsection{核心投资看点}\label{ux6838ux5fc3ux6295ux8d44ux770bux70b9}
 
-\begin{BusinessTable}
+\SummaryPoint{产品差异}{以伙伴心愿驱动废墟探索和家园装修，并用AI记忆陪伴承接玩家的真实经历}
 
-{\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.1800}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.8200}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 维度
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 当前基础
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-产品差异 & 以伙伴心愿驱动废墟探索和家园装修，并用 AI 记忆陪伴承接玩家的真实经历 \\
-交付验证 & 可玩Demo、展会与定向试玩、19份有效问卷、光子概念赛道银奖 \\
-团队能力 & 7人覆盖游戏研发主要职能，团队成员具备米哈游、出海游戏公司、搜狐、字节跳动等经历 \\
-商业路径 & Steam买断制，先验证PC本体，再按真实数据决定DLC、语言和平台扩展 \\
-资源纪律 & 2名创始成员已停止其他工作并专注投入项目；增长预算分批测试；扩编和后续内容均设置决策门槛 \\
-\end{longtable}
-}
+\SummaryPoint{交付验证}{可玩Demo、展会与定向试玩、19份有效问卷、光子概念赛道银奖}
 
-\end{BusinessTable}
+\SummaryPoint{团队能力}{2名专注投入的创始成员+6名阶段成员覆盖主要研发职能，具备米哈游、出海游戏公司、搜狐、字节跳动、谢尔丹大学等背景}
+
+\SummaryPoint{商业路径}{Steam买断制，先验证PC本体，再按真实数据决定DLC、语言和平台扩展}
+
+\SummaryPoint{资源纪律}{2名创始成员已停止其他工作并专注投入项目；增长预算分批测试；扩编和后续内容均设置决策门槛}
 
 \section{二、产品与用户价值}\label{ux4e8cux4ea7ux54c1ux4e0eux7528ux6237ux4ef7ux503c}
 
 \subsection{2.1 产品卖点}\label{21-ux4ea7ux54c1ux5356ux70b9}
 
-《虫虫家装》的核心卖点不是多套玩法并列，而是一条连续的玩家动机链：伙伴提出心愿，玩家为它进入废墟，把物品安全带回家，再通过装修和回应看见关系变化。野外探索制造稀缺性和取舍，家园装修兑现成果和情感价值，AI 记忆把玩家的付出沉淀为可被角色回应的共同经历。
-
-这个结构让几种体验互相增强：
+《虫虫家装》的核心卖点是一条连续的玩家动机链：伙伴提出心愿，玩家进入废墟寻找物品，带回家后通过装修和回应推动关系发展。野外探索制造稀缺性和取舍，家园装修兑现成果和情感价值，AI记忆把玩家的付出沉淀为可被角色回应的共同经历。
 
 \begin{BusinessTable}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4700}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 体验环节
@@ -294,50 +331,46 @@
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-野外探索 & 紧张，取舍，收益与撤离判断 & 让资源有获得成本，让家具更有价值 \\
-家园装修 & 放松，创造，看见空间变好 & 把冒险收益转化为可展示的成果 \\
-伙伴反馈 & 被等待，被记住，被回应 & 让家园承载关系和长期留存 \\
-AI 记忆陪伴 & 每个玩家的选择和经历被持续回应 & 降低重复感，增强陪伴感和分享欲 \\
+野外探索 & 紧张、取舍、收益与撤离判断 & 让资源有获得成本，让家具更有价值 \\
+家园装修 & 放松、创造、看见空间变好 & 把冒险收益转化为可展示的成果 \\
+伙伴反馈 & 被等待、被记住、被回应 & 让家园承载关系和长期留存 \\
+AI记忆陪伴 & 每个玩家的选择和经历被持续回应 & 降低重复感，增强陪伴感和分享欲 \\
 \end{longtable}
 }
 
 \end{BusinessTable}
 
-因此，本项目不是单纯的装修游戏，也不是硬核生存冒险。它的独特性在于用轻量风险制造获得感，用家园装修兑现情绪价值，再通过伙伴事件和 AI 记忆形成长期陪伴与分享动力。冒险探索的定位是留存与情绪工具：让核心装修玩家的每次收获更有价值、停留时间更长，而非直接吸引硬核冒险玩家。
+项目将装修、轻量风险和伙伴关系整合为一条体验链：探索提高家具与资源的获得价值，家园装修承接成果展示和情绪回报，伙伴事件与AI记忆推动长期陪伴和分享。冒险探索首先服务于装修用户的留存与情绪体验。
 
 \subsection{2.2 核心循环}\label{22-ux6838ux5fc3ux5faaux73af}
 
-玩家进入废墟寻找材料，家具，蓝图和世界线索。随着探索深入，收益提高，风险也上升。玩家需要判断是继续寻找高价值物资，还是带着已有收获安全撤离。撤离失败或被击倒时，玩家会损失本次探索中尚未成功带回的部分物资；已完成的家园，已入住的小动物和永久成长不会消失，关键任务物品也可重新获得，惩罚强度保持可恢复。
+玩家进入废墟寻找材料、家具、蓝图和世界线索。随着探索深入，收益提高，风险也上升。玩家需要判断是继续寻找高价值物资，还是带着已有收获安全撤离。撤离失败或被击倒时，玩家会损失本次探索中尚未成功带回的部分物资；已完成的家园、已入住的小动物和永久成长不会消失，关键任务物品也可重新获得，惩罚强度保持可恢复。
 
-回到家后，玩家把带回的资源用于制作和摆放家具，改善避难所，完成伙伴心愿，解锁新的房间，事件和探索目标。随着主线剧情推进，更多小动物伙伴会加入避难所，带来新的生活需求，个人故事和装修目标。野外给家园提供材料和故事，家园再反过来给下一次冒险提供动机。
+回到家后，玩家把带回的资源用于制作和摆放家具，改善避难所，完成伙伴心愿，解锁新的房间、事件和探索目标。随着主线剧情推进，更多小动物伙伴会加入避难所，带来新的生活需求、个人故事和装修目标。野外给家园提供材料和故事，家园再反过来给下一次冒险提供动机。
 
 这种循环的优势是节奏天然有张有弛：危险之后有安全感，努力之后有可见变化，每一次装修成果都带着一次冒险经历。
 
-\subsection{2.3 伙伴事件与 AI 记忆陪伴}\label{23-ux4f19ux4f34ux4e8bux4ef6ux4e0e-ai-ux8bb0ux5fc6ux966aux4f34}
+\subsection{2.3 长线动力}\label{23-ux957fux7ebfux52a8ux529b}
+
+游戏的持续动力不只依赖主线剧情。短期目标来自伙伴心愿、家具需求和单次探索收获；中期目标来自房间扩建、家具套装、图鉴收集、新小动物加入和关系事件；长期目标来自高风险区域挑战、家园持续改造、伙伴关系补完和上线后的新区域、新家具主题、新动物伙伴。不同玩家的家具选择、房间布局、小动物组合和共同经历不同，也天然适合截图和短视频分享。
+
+\subsection{2.4 伙伴事件与AI记忆陪伴}\label{24-ux4f19ux4f34ux4e8bux4ef6ux4e0eaiux8bb0ux5fc6ux966aux4f34}
 
 伙伴系统负责把``房子变好''转化为``关系变近''。小动物会随主线推进逐步加入家园，提出心愿，使用家具，回应房间变化，记录共同经历，并随信任提升解锁个人故事。
 
-AI 的作用不是开放式闲聊，而是记录玩家与角色的共同经历，并基于玩家真实发生过的探索，装修和互动事实，生成受约束的短反馈。比如玩家冒险带回床头灯并摆在伙伴房间后，伙伴可以结合自身性格，当前关系和过往记忆，给出不同回应。
+AI记录玩家与角色的共同经历，并基于真实发生过的探索、装修和互动事实，生成受约束的短反馈。比如玩家带回床头灯并摆在伙伴房间后，伙伴可以结合性格、关系和过往记忆作出差异化回应。
 
-系统底层仍由规则控制任务条件，角色状态，记忆和奖励。模型不能虚构经历，也不能改变玩法结果；当断网或 AI 服务不可用时，探索，撤离，制造，装修和任务系统仍可运行，小动物改用人工预制反馈承接基础体验。当前 15 分钟 Demo 的 AI Token 消耗折合人民币不到 0.1 元；公开 Demo 上线后将记录实际触发次数，平均输入输出 Token，重试率和缓存命中率，并通过触发频率，上下文长度和模型替换控制单玩家成本。
+规则层负责任务条件、角色状态、记忆和奖励，模型仅生成受约束文本，不改变玩法结果。服务异常时，系统切换人工预制反馈，不影响核心流程。当前15分钟Demo的AI Token消耗不足0.1元；公开Demo上线后将根据触发频率、上下文长度、缓存命中率和模型成本校准单玩家成本。
 
-\subsection{2.4 AI 美术辅助与内容产能}\label{24-ai-ux7f8eux672fux8f85ux52a9ux4e0eux5185ux5bb9ux4ea7ux80fd}
+\section{三、目标用户、市场验证与竞争定位}\label{ux4e09ux76eeux6807ux7528ux6237ux5e02ux573aux9a8cux8bc1ux4e0eux7adeux4e89ux5b9aux4f4d}
 
-除 AI 记忆陪伴外，团队还计划引入 AI 管线辅助美术资产生产，以缓解小团队的内容产能压力。AI 的使用按资产类型分层：材质贴图、颜色变体、图标和重复性装饰件等数量大、差异小的资产优先由 AI 辅助生成；角色形象、招牌家具和主视觉等决定视觉辨识度的核心资产保持人工创作，以确保风格一致性。
+\subsection{3.1 目标用户}\label{31-ux76eeux6807ux7528ux6237}
 
-项目将遵守 Steam 对 AI 生成内容的披露要求，上线前完成相关申报与说明；AI 美术的模型调用成本纳入研发工具与 AI/云服务预算。团队的目标不是以 AI 替代美术，而是在保证视觉品质的前提下提升数量型资产的产出效率。
+核心种子用户为18---25岁女性向休闲游戏玩家，尤其是大学生和初入职场，喜欢装修、收集、温馨动物题材和生活模拟的Steam PC用户。她们更容易被家园改造、小动物陪伴、截图分享和轻度冒险反差吸引，是下一阶段Demo测试和社区冷启动的优先验证对象。
 
-\subsection{2.5 长线动力}\label{25-ux957fux7ebfux52a8ux529b}
+扩展用户为18---30岁，喜欢模拟经营、装修整理、探索经营和温馨叙事的PC玩家。早期样本中，18---25岁占74\%，女性占68\%，与种子用户定位一致；后续将通过扩大试玩、Steam商店页和公开Demo数据验证用户范围、价格接受度和内容偏好。
 
-游戏的持续动力不只依赖主线剧情。短期目标来自伙伴心愿，家具需求和单次探索收获；中期目标来自房间扩建，家具套装，图鉴收集，新小动物加入和关系事件；长期目标来自高风险区域挑战，家园持续改造，伙伴关系补完和上线后的新区域，新家具主题，新动物伙伴。不同玩家的家具选择，房间布局，小动物组合和共同经历不同，也天然适合截图和短视频分享。
-
-\subsection{2.6 目标用户}\label{26-ux76eeux6807ux7528ux6237}
-
-核心种子用户为 18---25 岁女性向休闲游戏玩家，尤其是大学生和初入职场，喜欢装修，收集，温馨动物题材和生活模拟的 Steam PC 用户。她们更容易被家园改造，小动物陪伴，截图分享和轻度冒险反差吸引，是下一阶段 Demo 测试和社区冷启动的优先验证对象。
-
-扩展用户为 18---30 岁，喜欢模拟经营，装修整理，探索经营和温馨叙事的 PC 玩家。项目不会排除男性或更高年龄玩家，但早期宣传素材，试玩招募和社区内容会优先围绕种子用户验证。早期样本中，18---25 岁占 74\%，女性占 68\%，与当前种子用户定位一致；后续将通过更大规模试玩，Steam 商店页和公开 Demo 数据继续验证目标用户，价格接受度和内容偏好。
-
-\section{三、当前进展与验证}\label{ux4e09ux5f53ux524dux8fdbux5c55ux4e0eux9a8cux8bc1}
+\subsection{3.2 用户验证与付费意愿}\label{32-ux7528ux6237ux9a8cux8bc1ux4e0eux4ed8ux8d39ux610fux613f}
 
 \begin{BusinessTable}
 
@@ -370,66 +403,15 @@ AI 的作用不是开放式闲聊，而是记录玩家与角色的共同经历�
 
 下一阶段将扩大至100---300名目标玩家，分别招募装修核心用户、轻冒险用户和混合用户，并结合Steam愿望单、Demo完成率、重复启动率和价格测试验证市场接受度；相关数据将用于校准定价、内容范围与销量情景。
 
-下一轮测试将在现有问卷基础上补充行为数据，重点观察首次完整循环完成率、Demo完成率、重复启动率、二次探索和二次装修比例，并通过情绪问卷验证``野外紧张感是否放大家园装修和伙伴陪伴的情绪回报''。AI伙伴部分将继续记录生成质量、事实一致性、敏感词过滤和模板降级情况，作为公开Demo前的工程验收项。
+测试将补充首次完整循环完成率、Demo完成率、重复启动率、二次探索和二次装修比例，并以情绪问卷评估探索对装修和伙伴陪伴体验的增量。AI伙伴同步记录生成质量、事实一致性、敏感词过滤和模板降级情况，作为公开Demo前的工程验收项。
 
-\section{四、团队与执行能力}\label{ux56dbux56e2ux961fux4e0eux6267ux884cux80fdux529b}
+\subsection{3.3 市场机会}\label{33-ux5e02ux573aux673aux4f1a}
 
-团队共有7名核心成员，覆盖游戏研发主要环节。木子、粥粥目前没有其他工作，已将主要时间和职业精力投入《虫虫家装》的持续开发；两人在融资到位前以明显低于市场水平的薪酬支撑更长研发周期，体现创始团队对项目的长期承诺。其他成员按岗位和阶段交付参与，团队已用当前协作方式完成从概念开发到展会试玩的阶段性交付。木子担任制作人，统一负责产品范围、研发排期和最终玩法决策；粥粥兼管Steam商店、社区与发行数据。投资协议签署前，团队将通过成员协议明确档期、最低交付量、验收节点、署名和退出机制，知识产权归属与登记见第十章。
-
-\begin{BusinessTable}
-
-{\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2400}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1300}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.6300}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 角色
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 成员
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 核心背景与职责
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-制作人、程序与技术负责人 & 木子 & 香港中文大学计算机科学专业；曾在米哈游从事4年中台算法工作；目前无其他工作，专注投入项目开发；负责产品范围、研发排期、最终玩法决策、技术架构和AI工程化 \\
-主策划 & 佩玖 & 曾在北京搜狐实习，现就职于一线出海游戏公司；负责玩法、系统、关卡节奏和玩家体验 \\
-美术/动画、运营与发行 & 粥粥 & 四川美术学院动画专业；曾就职于字节跳动；目前无其他工作，专注投入项目开发；负责美术风格、视觉设计，并兼管Steam商店、社区运营和发行数据 \\
-动画 & 高高 & 负责角色动画与动态叙事表现 \\
-概念设计 & 咸水鱼 & 跨领域艺术创作者；负责角色、世界观和视觉叙事开发 \\
-UI/UX & Suki & 华东师范大学数码艺术专业；负责全流程界面、交互规范与家装体验 \\
-音频 & 丫丫 & 伯克利音乐学院背景；负责动态音乐、环境音和交互音频 \\
-\end{longtable}
-}
-
-\end{BusinessTable}
-
-团队目前美术相关成员人数充足（粥粥、高高、咸水鱼、Suki 及两名外部协作美术），主要短板在于核心美术与发行职责集中在粥粥身上；发行高峰期将通过阶段外包或增加稳定美术产能分担压力。
-
-\subsection{4.1 团队执行基础}\label{41-ux56e2ux961fux6267ux884cux57faux7840}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{已有交付}：团队已用当前协作方式完成可玩Demo、展会与定向试玩和赛事交付。
-\item
-  \textbf{协作经过验证}：核心成员此前共同完成GMTK Game Jam 2025作品《Not Again, Hero》，在9,562份作品中取得叙事第141名（Top 1.5\%）。
-\item
-  \textbf{创始成员承诺}：木子、粥粥已停止其他工作，专注投入项目开发；其他成员以明确交付物和验收节点参与。
-\end{itemize}
-
-\section{五、市场与竞争}\label{ux4e94ux5e02ux573aux4e0eux7adeux4e89}
-
-\subsection{5.1 市场机会}\label{51-ux5e02ux573aux673aux4f1a}
-
-本项目不以全球游戏市场规模直接倒推销量，而是观察 Steam 平台上与项目相邻的装修，温馨建造，空间整理和探索经营产品。装修，收集和温馨模拟产品验证了创造与治愈体验的付费需求；搜打撤和双循环产品验证了风险---收益与``外出---回家''的驱动力。本项目将依据 Steam 相邻产品，愿望单，Demo 数据和实际获客效率估算可触达市场。
+项目采用自下而上的市场测算方法，重点参考Steam相邻产品、愿望单、Demo行为和实际获客效率。装修、收集和温馨模拟产品体现了创造与治愈体验的付费需求，撤离与双循环产品体现了风险---收益和``外出---回家''的驱动力。
 
 截至2026年8月18日的第三方市场快照显示，相邻产品从数万套到数十万套均有案例：《Furnish Master》约6.9万套、《林间暖巢》约8.8万套、《呓语小镇》约25.8万套、《焕家物语 Hozy》约32.3万套、《Unpacking》约66.3万套。上述销量为SteamData.ai第三方估算，用于判断市场量级，完整口径见附录C。相邻产品在首发定价、团队规模和发行资源上存在差异，团队将在下一阶段补充各对标产品的价格带、团队规模与发行资源信息，据此校准可达销量与保本线。
 
-\subsection{5.2 产品定位与相邻参照}\label{52-ux4ea7ux54c1ux5b9aux4f4dux4e0eux76f8ux90bbux53c2ux7167}
+\subsection{3.4 市场定位与同类产品对标}\label{34-ux5e02ux573aux5b9aux4f4dux4e0eux540cux7c7bux4ea7ux54c1ux5bf9ux6807}
 
 \begin{BusinessTable}
 
@@ -459,98 +441,138 @@ UI/UX & Suki & 华东师范大学数码艺术专业；负责全流程界面、�
 
 \end{BusinessTable}
 
-相较单一装修或单一探索产品，本项目用野外风险提高家具和资源的获得价值，用家园装修承接长期展示和分享，用持续加入的动物伙伴承担情感留存。AI 反馈基于玩家真实经历生成差异化表达，进一步降低固定台词的重复感。
+相较单一装修或单一探索产品，本项目以野外风险提升资源获得价值，以家园装修承接展示和分享，以动物伙伴和基于真实经历的AI反馈推动情感留存。
 
 项目的持续竞争力将来自双循环的长期调试、家具与伙伴事件积累、可替换可降级的AI工程能力，以及适合玩家截图和短视频分享的社区内容资产。
 
-\section{六、商业模式与发行策略}\label{ux516dux5546ux4e1aux6a21ux5f0fux4e0eux53d1ux884cux7b56ux7565}
+\section{四、团队与执行能力}\label{ux56dbux56e2ux961fux4e0eux6267ux884cux80fdux529b}
 
-\subsection{6.1 收入模式}\label{61-ux6536ux5165ux6a21ux5f0f}
+团队由2名专注投入的创始成员和6名阶段成员组成，覆盖游戏研发主要环节。木子、粥粥目前没有其他工作，已将主要时间和职业精力投入《虫虫家装》的持续开发；两人在融资到位前以明显低于市场水平的薪酬支撑更长研发周期。其余成员按岗位和阶段交付参与，团队已用当前协作方式完成从概念开发到展会试玩的阶段性交付。木子担任制作人，统一负责产品范围、研发排期和最终玩法决策；粥粥兼管Steam商店、社区与发行数据。投资协议签署前，团队将通过成员协议明确档期、最低交付量、验收节点、署名和退出机制。
+
+\begin{BusinessTable}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2400}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1300}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.6300}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 角色
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 成员
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 核心背景与职责
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+制作人、程序与技术负责人 & 木子 & 香港中文大学计算机科学专业；曾在米哈游从事4年中台算法工作；目前无其他工作，专注投入项目开发；负责产品范围、研发排期、最终玩法决策、技术架构和AI工程化 \\
+主策划 & 佩玖 & 曾在北京搜狐实习，现就职于一线出海游戏公司；负责玩法、系统、关卡节奏和玩家体验 \\
+美术/动画、运营与发行 & 粥粥 & 四川美术学院动画专业；曾就职于字节跳动；目前无其他工作，专注投入项目开发；负责美术风格、视觉设计，并兼管Steam商店、社区运营和发行数据 \\
+动画 & 高高 & 负责角色动画与动态叙事表现 \\
+概念设计 & 咸水鱼 & 跨领域艺术创作者；负责角色、世界观和视觉叙事开发 \\
+美术 & 雪格 & 谢尔丹大学动画专业；负责场景、家具与角色相关美术资产制作 \\
+UI/UX & Suki & 华东师范大学数码艺术专业；负责全流程界面、交互规范与家装体验 \\
+音频 & 丫丫 & 伯克利音乐学院背景；负责动态音乐、环境音和交互音频 \\
+\end{longtable}
+}
+
+\end{BusinessTable}
+
+团队目前美术相关成员人数充足（粥粥、高高、咸水鱼、雪格、Suki）；发行高峰期仍可以通过阶段外包或增加稳定美术产能分担峰值压力。
+
+成员协议将明确档期、交付、验收、署名和退出机制，知识产权归属与登记纳入融资交割前的准备事项。
+
+\subsection{4.1 团队执行基础}\label{41-ux56e2ux961fux6267ux884cux57faux7840}
+
+已有交付：团队已用当前协作方式完成可玩Demo、展会与定向试玩和赛事交付。
+
+协作经过验证：核心成员此前共同完成GMTK Game Jam 2025作品《Not Again, Hero》，在9,562份作品中取得叙事第141名（Top 1.5\%），美术第14名（Top 0.1\%）。
+
+创始成员承诺：木子、粥粥已停止其他工作，专注投入项目开发；其他成员以明确交付物和验收节点参与。
+
+\section{五、商业模式与市场进入策略}\label{ux4e94ux5546ux4e1aux6a21ux5f0fux4e0eux5e02ux573aux8fdbux5165ux7b56ux7565}
+
+\subsection{5.1 收入模式}\label{51-ux6536ux5165ux6a21ux5f0f}
 
 项目计划在Steam以买断制首发，标价参考同类独立游戏的15---25美元区间；财务模型按折扣、区域价格和退款后的人民币80元平均含税成交额测算。最终定价将结合Demo反馈、愿望单质量、发行建议和区域价格测试确定；Demo阶段将开展50元、60元、80元三档价格敏感度测试，以测试结果作为最终定价依据。
 
 PC本体收入构成基准经营情景。首发后将根据销量、退款率、好评率、留存和现金流，评估DLC、新语言和新平台的扩展机会。
 
-\subsection{6.2 市场进入路径}\label{62-ux5e02ux573aux8fdbux5165ux8defux5f84}
+\subsection{5.2 市场进入路径}\label{52-ux5e02ux573aux8fdbux5165ux8defux5f84}
 
-项目采用``\textbf{自发行能力先行、发行合作保留选择权}''的原则。团队自行掌握商店页、社区、数据归因和基础内容营销；如发行伙伴能提供明确的平台资源、海外公关、创作者网络、本地化、QA或主机移植能力，再综合比较分成、版权、区域、营销承诺和退出条款。
+项目采用``自发行能力先行、发行合作保留选择权''的原则。团队自行掌握商店页、社区、数据归因和基础内容营销；如发行伙伴能提供明确的平台资源、海外公关、创作者网络、本地化、QA或主机移植能力，再综合比较分成、版权、区域、营销承诺和退出条款。
+
+推进顺序为``垂直切片与定位验证---Steam商店及公开Demo冷启动---平台活动和创作者放大---发售预热---首发复盘''。各阶段时间、研发交付和市场验证统一见第六章时间线，避免研发与发行计划分开管理。
+
+\subsection{5.3 获客漏斗}\label{53-ux83b7ux5ba2ux6f0fux6597}
+
+项目采用``内容验证优先、自然传播为主、付费渠道逐级放大''的获客策略。垂直切片和公开Demo首先验证产品素材、商店页面与玩家家装分享是否能够带来有效兴趣；在愿望单质量、Demo完成率和重复启动率达到阶段目标后，再通过Steam平台活动、创作者内容和小规模付费测试扩大触达。购买转化、退款率和口碑数据将反向决定后续投放规模、发售节奏与内容投入。
 
 \begin{BusinessTable}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1400}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1400}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3600}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3600}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1400}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3800}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 阶段
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 时间
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 用户路径
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 核心动作
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 关键验证
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 核心指标
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-定位验证 & 2026 Q3---Q4 & 12月完成垂直切片；扩大试玩；测试宣传语、截图和短视频 & 哪类用户与内容最容易产生兴趣 \\
-商店与Demo冷启动 & 2026 Q4---2027 Q1 & 先上线Steam商店页，垂直切片完成后发布公开Demo；建立中英文社区 & 商店访问、愿望单、有效游玩、完成率和素材转化 \\
-Demo放大 & 2027 Q2---Q4 & 持续迭代Demo；参加适配的平台活动；接触创作者与媒体 & 愿望单质量、自然传播和渠道效率 \\
-发售预热 & 2027 Q4---2028 Q1 & 分发预览版；完成宣传片、媒体资料和评测码 & 创作者反馈、愿望单质量与首发内容储备 \\
-首发复盘 & 2028 Q1及首发后90天 & Steam全球首发；集中维护；推动玩家分享家装成果 & 销量、退款率、好评率、留存、地区和现金流 \\
+认知 & 定位素材、截图、短视频、赛事和创作者内容 & 曝光、完播率、互动率 \\
+兴趣 & Steam商店页与中英文社区 & 商店访问、访问转愿望单 \\
+体验 & 公开Demo、Steam平台活动、线下试玩 & Demo下载、有效游玩、完成率、重复启动 \\
+转化 & 预览版、评测码、发售提醒 & 愿望单转购买、首周销量、退款率 \\
+口碑 & 稳定性维护、玩家家装分享、社区运营 & 好评率、留存、UGC与自然愿望单增长 \\
 \end{longtable}
 }
 
 \end{BusinessTable}
 
-\subsection{6.3 渠道和增长纪律}\label{63-ux6e20ux9053ux548cux589eux957fux7eaaux5f8b}
+\subsection{5.4 渠道和增长纪律}\label{54-ux6e20ux9053ux548cux589eux957fux7eaaux5f8b}
 
-发行与增长预算60万元：外部广告投放与渠道验证上限20万元、创作者合作20万元、商店与宣传物料10万元、Demo及活动5万元、社区与预备5万元。对玩家传播优先使用``治愈冒险装修''等更直观表达，避免``搜打撤''被误解为枪战或 PvP 游戏；对行业和投资人则使用``伙伴心愿驱动的轻量 PvE 撤离冒险''。外部广告预算主要支付给Reddit、Meta、YouTube等媒体平台，与创作者合作费用分开核算，并按素材测试、商店转化和渠道放大分阶段释放。渠道优先级为：
+发行与增长预算60万元：外部广告投放与渠道验证上限20万元、创作者合作20万元、商店与宣传物料10万元、Demo及活动5万元、社区与预备5万元。对玩家传播优先使用``治愈冒险装修''等更直观表达，避免``搜打撤''被误解为枪战或PvP游戏；对行业和投资人则使用``伙伴心愿驱动的轻量PvE撤离冒险''。
 
-\begin{quote}
-\textbf{高质量Demo与自然传播 → Steam平台活动 → 创作者与媒体 → 小规模付费测试}
-\end{quote}
+外部广告预算主要支付给Reddit、Meta、YouTube等媒体平台，与创作者合作费用分开核算，并按素材测试、商店转化和渠道放大分阶段释放。渠道优先级为：
+
+\begin{BusinessCallout}
+
+高质量Demo与自然传播 → Steam平台活动 → 创作者与媒体 → 小规模付费测试
+
+\end{BusinessCallout}
 
 所有可追踪外部链接使用Steamworks UTM，并同时观察总愿望单基线。付费预算按素材、商店转化和渠道放大逐级释放，首轮以5---12元/个可归因愿望单作为测试区间。CAC长期高于12元或总愿望单缺乏同步增长时，团队将把预算转向Demo、商店素材和创作者内容。
 
-\section{七、研发计划与里程碑}\label{ux4e03ux7814ux53d1ux8ba1ux5212ux4e0eux91ccux7a0bux7891}
+\section{六、开发、发行与南山落地一体化时间线}\label{ux516dux5f00ux53d1ux53d1ux884cux4e0eux5357ux5c71ux843dux5730ux4e00ux4f53ux5316ux65f6ux95f4ux7ebf}
 
-\begin{BusinessTable}
+\TimelineEntry{2026 Q2---Q4｜垂直切片}{核心双循环、AI原型和美术方向已验证；12月完成品质收尾、美术风格一致性验收和公开Demo准备}{扩大试玩；测试宣传语、截图和短视频；准备Steam商店页}{启动南山主体注册/迁入、成员协议与IP梳理}{验证哪类用户与内容最容易产生兴趣；从Demo进入可规模生产}
 
-{\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1600}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.6900}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 阶段
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 时间
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 核心交付与决策
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-垂直切片 & 2026 Q2---Q4 & 核心双循环、AI原型和美术方向已验证；12月完成品质收尾、美术风格一致性验收和公开Demo准备 \\
-Alpha & 2027 Q1---Q2 & 用6个月完成所有核心系统和首发内容管线，贯通完整流程并进入批量内容生产 \\
-Beta & 2027 Q3---Q4 & 用6个月完成首发内容、封闭测试、修复、调优和本地化；年末冻结功能与内容范围 \\
-Gold与发售 & 2028 Q1 & 完成Release Candidate、平台审核、发售预热和Steam全球首发 \\
-首发后维护 & 2028 Q2 & 完成首发后90天稳定性维护和商业复盘；评估后续内容、新平台与投入规模 \\
-\end{longtable}
-}
+\TimelineEntry{2026 Q4---2027 Q1｜商店与Demo冷启动}{完成垂直切片并启动Alpha核心系统}{先上线Steam商店页，垂直切片完成后发布公开Demo；建立中英文社区}{融资交割后12个月内完成南山运营主体注册或迁入，并以南山主体继续开发}{观察商店访问、愿望单、有效游玩、完成率和素材转化}
 
-\end{BusinessTable}
+\TimelineEntry{2027 Q1---Q2｜Alpha}{用6个月完成所有核心系统和首发内容管线，贯通完整流程并进入批量内容生产}{持续迭代Demo；参加适配的平台活动；接触创作者与媒体}{核心岗位稳定到岗；南山主体承接研发管理、用工与IP}{验证内容月度产能、完整流程和愿望单质量}
 
-\subsection{首发内容规模与生产原则}\label{ux9996ux53d1ux5185ux5bb9ux89c4ux6a21ux4e0eux751fux4ea7ux539fux5219}
+\TimelineEntry{2027 Q3---Q4｜Beta}{用6个月完成首发内容、封闭测试、修复、调优和本地化；年末冻结功能与内容范围}{持续Demo放大、平台活动、创作者预览与媒体测试}{完成软著、商标、素材授权台账和发行合规文件}{验证愿望单质量、自然传播、渠道效率和最低首发范围}
+
+\TimelineEntry{2027 Q4---2028 Q1｜Gold与发售}{完成Release Candidate、平台审核、发售预热和Steam全球首发}{分发预览版；完成宣传片、媒体资料和评测码}{完成客服、运营、财税与发行结算体系}{验证创作者反馈、愿望单质量与首发内容储备}
+
+\TimelineEntry{2028 Q1及首发后90天}{完成稳定性维护、修复、平衡与商业复盘}{Steam全球首发；集中维护；推动玩家分享家装成果}{评估后续团队扩展和南山产业合作}{观察销量、退款率、好评率、留存、地区和现金流；决定后续内容、新平台与投入规模}
+
+\subsection{6.1 首发内容规模与生产原则}\label{61-ux9996ux53d1ux5185ux5bb9ux89c4ux6a21ux4e0eux751fux4ea7ux539fux5219}
 
 团队以《呓语小镇》首发本体作为内容量级参照，目标核心游玩时长约15小时，保底可发行范围为6---8小时，覆盖基础家具及变体、可组合模块、主题套装、可装修空间、随主线加入的小动物伙伴及关系事件。2026年12月完成内容矩阵和生产压力测试，Alpha验证月度产能，并在Alpha结束前按产能压力测试结果于6---15小时之间锁定首发范围；Beta完成内容并冻结范围。若产能低于预期，将优先压缩主题套装与关系事件数量，而非牺牲核心循环品质。
+
+\subsection{6.2 核心成功指标}\label{62-ux6838ux5fc3ux6210ux529fux6307ux6807}
 
 \begin{BusinessTable}
 
@@ -583,11 +605,118 @@ Beta结束 & 首发内容 & 目标15小时、保底6---8小时；内容范围冻
 
 \end{BusinessTable}
 
-销量预期按愿望单漏斗校准：行业经验首发12个月销量约为首发愿望单的0.4倍（以商店页转化率与Demo完成率滚动校准）；据此8万套保本对应约20万愿望单，15万套基准对应约37.5万愿望单。
+销量预期按愿望单漏斗校准：当前财务模型暂按首发12个月销量约为首发愿望单的0.4倍进行管理测算，后续将以商店页转化率、Demo完成率和实际首发数据校准；据此8万套保本对应约20万愿望单，15万套基准对应约37.5万愿望单。
 
-\section{八、融资计划与经营情景}\label{ux516bux878dux8d44ux8ba1ux5212ux4e0eux7ecfux8425ux60c5ux666f}
+\section{七、关键挑战、风险控制与合规}\label{ux4e03ux5173ux952eux6311ux6218ux98ceux9669ux63a7ux5236ux4e0eux5408ux89c4}
 
-\subsection{8.1 融资概况}\label{81-ux878dux8d44ux6982ux51b5}
+\subsection{7.1 关键风险、控制措施与决策门槛}\label{71-ux5173ux952eux98ceux9669ux63a7ux5236ux63aaux65bdux4e0eux51b3ux7b56ux95e8ux69db}
+
+本项目当前风险主要集中在产品定位、内容产能、市场转化和AI应用四个方面。团队不以一次性判断替代验证，而是在研发与发行节点设置可观察指标，并据此决定扩大投入、调整定位、压缩范围或延后发售。
+
+\begin{BusinessTable}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2700}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 关键风险
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 当前依据
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 控制措施与决策门槛
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+双循环与品类定位 & 19份早期反馈呈现正向信号，但样本量有限；轻冒险与装修的组合仍需行为数据验证 & 扩大至100---300名目标玩家并开展分层试玩，分别观察装修核心用户、轻冒险用户和混合用户的完整循环完成率、重复启动率与体验评分；据结果调整冒险难度，并决定将其作为留存工具还是扩圈卖点 \\
+小团队内容产能 & 2名创始成员专注投入，其他成员按阶段交付，核心美术与发行职责相对集中 & 投资协议签署前明确成员交付与知识产权；2026年12月完成生产压力测试，Alpha建立月度产能基线并锁定首发范围；若产能不足，优先压缩主题套装和关系事件，关键环节采用质量保障、本地化和峰值外包 \\
+市场与销量 & 愿望单和购买转化尚待商店页与公开试玩验证 & 按``商店页---公开试玩---平台活动---小规模付费测试''逐级验证；以愿望单质量、试玩完成率、获客成本和购买转化滚动校准销量情景，并据数据调整投放规模、发售时点与收入预期 \\
+AI体验增量 & 伙伴反馈原型已跑通，但对留存和情绪价值的贡献尚未量化 & 对比预制反馈与AI记忆反馈，观察角色互动率、继续装修意愿、情绪评分和重复启动率；若增量不显著，则减少触发频率，将资源优先投入人工关系事件与核心内容 \\
+游戏内AI质量、成本与可用性 & 15分钟Demo的AI Token消耗折合人民币不到0.1元；AI接口不是核心玩法运行前提 & 由规则层管理事实、记忆和结果，模型仅生成受约束短文本；通过一致性校验、重试、缓存、模板降级和模型替换控制质量与成本；断网或服务异常时切换预制反馈，不阻断核心流程 \\
+现金流与延期 & 保守销量情景下存在资金压力，内容范围扩张会放大延期风险 & 融资分三阶段拨付，保留40万元风险储备和6万元管理缓冲；各阶段以可玩版本、内容产能、预算执行和市场数据验收，未达预期时先缩减非核心内容，再决定延期或追加投入 \\
+全球发行能力 & 团队正在建设海外商店、社区、数据归因和合作网络 & 自建基础发行能力并同步接触发行商；仅在对方能提供明确的平台资源、海外公关、创作者网络、本地化或主机能力，且分成、版权和退出条款可接受时合作 \\
+\end{longtable}
+}
+
+\end{BusinessTable}
+
+\section{八、预算、融资方案与投资回报逻辑}\label{ux516bux9884ux7b97ux878dux8d44ux65b9ux6848ux4e0eux6295ux8d44ux56deux62a5ux903bux8f91}
+
+\subsection{8.1 预算与成本结构：钱花在哪里、换来什么}\label{81-ux9884ux7b97ux4e0eux6210ux672cux7ed3ux6784ux94b1ux82b1ux5728ux54eaux91ccux6362ux6765ux4ec0ux4e48}
+
+\begin{BusinessTable}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1200}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 用途
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 金额
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 占比
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 主要依据
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+2名核心创始成员薪酬及单位用工成本 & 80万元 & 26.7\% & 2人×1.5万元/月×21个月，加27\%综合用工预算系数 \\
+6名阶段成员报酬 & 48万元 & 16.0\% & 按岗位、交付物和验收节点付费；新增美术成员用于提升稳定美术产能 \\
+QA、本地化及峰值内容外包 & 24万元 & 8.0\% & QA 6万、本地化及LQA 6万、内容外包12万 \\
+研发工具、设备及AI/云服务 & 25万元 & 8.3\% & Unity、设备、AI/云、软件素材和价格缓冲 \\
+发行与增长 & 60万元 & 20.0\% & 外部广告投放与渠道验证、创作者、商店物料、Demo活动和社区 \\
+法务、知识产权与基础运营 & 17万元 & 5.7\% & 合同、软著商标、财税主体和办公协作 \\
+现金流与范围风险储备 & 40万元 & 13.3\% & 约2---3个月核心现金支出 \\
+未分配管理缓冲 & 6万元 & 2.0\% & 按里程碑复盘结果释放 \\
+合计 & 300万元 & 100\% & --- \\
+\end{longtable}
+}
+
+\end{BusinessTable}
+
+\subsection{8.2 资金投入→阶段里程碑→下一阶段价值提升}\label{82-ux8d44ux91d1ux6295ux5165ux9636ux6bb5ux91ccux7a0bux7891ux4e0bux4e00ux9636ux6bb5ux4ef7ux503cux63d0ux5347}
+
+\begin{BusinessTable}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1300}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3400}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3300}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 阶段
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 参考预算
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 核心里程碑
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 投资后价值提升
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+垂直切片收尾与初始版本生产 & 120万元 & 完成可运行的完整流程，核心系统完成，内容产能通过验证，提交预算执行报告 & 从可玩Demo进入可持续生产的产品与团队资产 \\
+测试版本生产 & 100万元 & 首发内容完成，功能与范围冻结，发行准备方案通过 & 形成完整内容资产、愿望单与Demo信号，并提高上市计划的确定性 \\
+正式发行与首发维护 & 80万元 & 完成发行候选版本、平台审核、Steam首发及首发后90天维护 & 获得真实收入、口碑、用户与下一阶段估值依据 \\
+\end{longtable}
+}
+
+\end{BusinessTable}
+
+\subsection{8.3 融资方案}\label{83-ux878dux8d44ux65b9ux6848}
 
 \begin{BusinessTable}
 
@@ -599,102 +728,37 @@ Beta结束 & 首发内容 & 目标15小时、保底6---8小时；内容范围冻
 \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 项目
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 内容
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 方案
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
 融资轮次 & 天使轮 \\
-融资金额 & \textbf{300万元人民币} \\
-融资结构 & \textbf{一次签署300万元完整投资承诺，按120万＋100万＋80万分三阶段拨付} \\
-股权与估值 & 结合Demo、愿望单实测和投资条款协商确定 \\
-计划时间 & 2026 Q4完成投资协议签署并启动第一期拨付 \\
-使用周期 & 2026 Q4---2028 Q2，共21个月，覆盖垂直切片收尾至首发后3个月 \\
+融资金额 & 300万元人民币 \\
+投资形式 & 优先采用公司股权融资，具体股权比例与估值结合试玩版本、愿望单实测和投资条款协商确定 \\
+融资安排 & 一次签署300万元完整投资承诺，按垂直切片收尾、测试版本生产、正式发行三个里程碑分三阶段拨付，金额为120万元、100万元和80万元 \\
+计划时间 & 2026年第四季度完成投资协议签署并启动第一期拨付 \\
+资金覆盖周期 & 2026年第四季度至2028年第二季度，共21个月，覆盖垂直切片收尾至首发后3个月 \\
+盈亏平衡预期 & 平均含税成交额80元、Steam平台费30\%下，税前经营保本约6.6---7.3万套，审慎按约8万套管理 \\
 \end{longtable}
 }
 
 \end{BusinessTable}
 
-本轮300万元覆盖2026年Q4至2028年Q2的新增现金需求，包括垂直切片收尾、Alpha、Beta、Gold、发行及首发后3个月维护；Steam平台费随流水扣除，首发12个月中融资周期以外的运营优先由产品回款覆盖。
+本轮300万元覆盖2026年第四季度至2028年第二季度的新增现金需求，包括垂直切片收尾、测试版本生产、正式发行及首发后3个月维护；Steam平台费随流水扣除，首发12个月中融资周期以外的运营优先由产品回款覆盖。
 
-\subsection{8.2 资金用途}\label{82-ux8d44ux91d1ux7528ux9014}
+\subsubsection{8.3.1 基于里程碑的分期拨付参考机制}\label{831-ux57faux4e8eux91ccux7a0bux7891ux7684ux5206ux671fux62e8ux4ed8ux53c2ux8003ux673aux5236}
 
-\begin{BusinessTable}
+三期金额及对应成果见8.2。每期以可玩版本、内容范围与产能、预算执行及Steam和Demo数据作为主要验收材料；第一期逐项现金安排、两轮验收条件和拨付原则见附录A。未使用资金继续纳入总预算与里程碑管理。
 
-{\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.4000}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1200}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3800}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 用途
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 金额
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 占比
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 主要依据
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-2名核心创始成员薪酬及单位用工成本 & 80万元 & 26.7\% & 2人×1.5万元/月×21个月，加27\%综合用工预算系数 \\
-5名阶段成员报酬 & 40万元 & 13.3\% & 按岗位、交付物和验收节点付费；本项可优先用于增加稳定美术产能或阶段外包，以提升内容生产确定性 \\
-QA、本地化及峰值内容外包 & 24万元 & 8.0\% & QA 6万、本地化及LQA 6万、内容外包12万 \\
-研发工具、设备及AI/云服务 & 25万元 & 8.3\% & Unity、设备、AI/云、软件素材和价格缓冲 \\
-发行与增长 & 60万元 & 20.0\% & 外部广告投放与渠道验证、创作者、商店物料、Demo活动和社区 \\
-法务、知识产权与基础运营 & 17万元 & 5.7\% & 合同、软著商标、财税主体和办公协作 \\
-现金流与范围风险储备 & 40万元 & 13.3\% & 约2---3个月核心现金支出 \\
-未分配管理缓冲 & 14万元 & 4.7\% & 按里程碑复盘结果释放 \\
-\textbf{合计} & \textbf{300万元} & \textbf{100\%} & --- \\
-\end{longtable}
-}
+投融资双方将预先书面约定核验主体、材料清单、反馈期限、整改期和重大范围变更流程，保障研发连续性。
 
-\end{BusinessTable}
+\begin{BusinessCallout}
 
-\subsection{8.3 里程碑式拨付安排}\label{83-ux91ccux7a0bux7891ux5f0fux62e8ux4ed8ux5b89ux6392}
+以上里程碑、金额与核验机制为融资沟通和内部管理参考，正式权利义务以投资协议、股东协议、项目协议及专业顾问意见为准。
 
-资金按客观里程碑分三期到账，兼顾投资风险控制与研发连续性。
-
-\begin{BusinessTable}
-
-{\def\LTcaptype{none} % do not increment counter
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2200}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1400}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2900}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 阶段
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 计划到账时间
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 金额
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 主要覆盖
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 下一阶段拨付依据
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-\textbf{第一期：垂直切片收尾与Alpha生产} & 投资协议生效后，预计2026 Q4 & \textbf{120万元} & 2名核心创始成员持续投入、5名成员阶段报酬、垂直切片收尾、核心系统、内容管线、Steam商店页、公开Demo及现金储备 & Alpha版本完整流程可玩、核心系统完成、内容产能经过验证并提交预算执行报告 \\
-\textbf{第二期：Beta生产} & Alpha验收后，预计2027 Q3 & \textbf{100万元} & 核心与阶段人力、首发内容生产、封闭测试、阶段外包、QA、本地化及Demo市场验证 & 首发内容完成、功能与范围冻结、发行和Gold计划通过 \\
-\textbf{第三期：Gold与首发} & Beta验收后，预计2028 Q1 & \textbf{80万元} & 核心与阶段人力、Release Candidate、平台审核、商店及创作者物料、首发推广和上线后90天保障 & 完成Gold、发行、Steam首发及首发后90天维护 \\
-\textbf{合计} & --- & \textbf{300万元} & 覆盖2026 Q4垂直切片收尾至首发后3个月 & --- \\
-\end{longtable}
-}
-
-\end{BusinessTable}
-
-三期均以可玩版本、内容范围与产能、预算执行及Steam和Demo数据作为验收材料。第一期逐项现金安排、两轮客观验收条件和拨付原则见附录A；未使用资金继续纳入总预算与里程碑管理。
+\end{BusinessCallout}
 
 \subsection{8.4 首发12个月经营情景}\label{84-ux9996ux53d112ux4e2aux6708ux7ecfux8425ux60c5ux666f}
 
@@ -707,21 +771,21 @@ QA、本地化及峰值内容外包 & 24万元 & 8.0\% & QA 6万、本地化及L
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1200}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1000}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1500}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1700}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1700}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1800}}
   >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2800}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 情景
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 销量
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 消费者支付总额
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 平台费后回款（税前）
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 项目累计经营现金净额
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 管理动作
@@ -732,7 +796,7 @@ QA、本地化及峰值内容外包 & 24万元 & 8.0\% & QA 6万、本地化及L
 \endlastfoot
 收缩 & 3万套 & 240万元 & 168万元 & 约-240万元 & 停发增长预算，压缩范围至6---8小时，以风险储备维持核心团队与商店运转 \\
 保守 & 5万套 & 400万元 & 280万元 & 约-130万元 & 聚焦本体维护和有效渠道，以风险储备控制损失 \\
-\textbf{审慎保本} & \textbf{约8万套} & \textbf{约640万元} & \textbf{约448万元} & \textbf{约0} & 覆盖本轮投入、首发12个月运营及必要波动 \\
+审慎保本 & 约8万套 & 约640万元 & 约448万元 & 约0 & 覆盖本轮投入、首发12个月运营及必要波动 \\
 基准 & 15万套 & 1,200万元 & 840万元 & 约400万元 & 完成本体维护，依据数据评估后续内容和平台 \\
 乐观 & 30万套 & 2,400万元 & 1,680万元 & 约1,160万元 & 分阶段扩大发行、内容和平台投入 \\
 \end{longtable}
@@ -740,79 +804,60 @@ QA、本地化及峰值内容外包 & 24万元 & 8.0\% & QA 6万、本地化及L
 
 \end{BusinessTable}
 
-\begin{quote}
-项目累计经营现金净额按平台费后回款减去本轮融资启动至首发12个月结束的项目现金支出及情景预留测算，融资流入不计入该指标。详细预留和税负边界见附录B。
-\end{quote}
+项目累计经营现金净额按平台费后回款减去本轮融资启动至首发12个月结束的项目现金支出及情景预留测算，融资流入不计入该指标。各情景聚焦PC本体收入，随愿望单、Demo、创作者反馈和首发数据滚动校准；正式发售前将根据商店访问、愿望单、公开Demo、创作者反馈、价格测试和愿望单转购买数据调整。
 
-各情景聚焦PC本体收入，随愿望单、Demo、创作者反馈和首发数据滚动校准；正式发售前将根据商店访问、愿望单、公开Demo、创作者反馈、价格测试和愿望单转购买数据调整。
-
-\subsection{8.5 投资价值}\label{85-ux6295ux8d44ux4ef7ux503c}
+\subsection{8.5 投资价值与回报逻辑}\label{85-ux6295ux8d44ux4ef7ux503cux4e0eux56deux62a5ux903bux8f91}
 
 本轮融资用于将一款已有Demo、核心循环、玩家反馈和赛事成果的在研产品推进至商业发行。项目在基准情景下具备盈利空间，并通过范围锁定、分期拨款和投放效率管理控制保守情景下的风险。
 
-工作室还将沉淀装修系统、AI叙事工程、内容生产管线、Steam发行能力和核心用户社区，为后续原创产品形成可复用的研发与发行基础。本轮融资将首先保障《虫虫家装》按计划完成并发行。
-
-AI 叙事工程的价值不在于增加台词数量，而在于把玩家的探索、装修和伙伴互动沉淀为可复用的记忆数据，支撑后续关系事件、个性化反馈和长线留存。
-
-\section{九、主要风险与控制措施}\label{ux4e5dux4e3bux8981ux98ceux9669ux4e0eux63a7ux5236ux63aaux65bd}
+工作室还将沉淀装修系统、AI叙事工程、内容生产管线、Steam发行能力和核心用户社区，为后续原创产品形成可复用的研发与发行基础。本轮融资将首先保障《虫虫家装》按计划完成并发行。AI叙事工程的价值不在于增加台词数量，而在于把玩家的探索、装修和伙伴互动沉淀为可复用的记忆数据，支撑后续关系事件、个性化反馈和长线留存。
 
 \begin{BusinessTable}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1800}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2400}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5800}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3400}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4200}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 风险
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 投资形式
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 当前事实
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 主要回报路径
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\cellcolor{TableHeader}\color{BrandBlue}\bfseries 控制措施与决策门槛
+\cellcolor{TableHeader}\color{BrandBlue}\bfseries 投资人获得的价值
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-双循环接受度 & 19份早期反馈呈现正向信号 & 扩大试玩并上线Demo；分别观察两类用户；根据数据调整难度与内容范围 \\
-品类定位 & 降低装修硬核度并加入冒险，可能两头不讨好 & 装修核心用户与轻冒险用户对比试玩；分别观察留存与评分；据数据决定冒险定位为留存工具或扩圈卖点 \\
-小团队产能 & 2名创始成员已停止其他工作、专注投入项目，其他成员阶段参与 & 签订交付与知识产权协议；Alpha前锁定范围；建立内容产能基线；关键环节短期外包 \\
-市场与销量 & 愿望单和购买转化进入下一阶段验证 & 通过商店页、Demo、平台活动和付费测试逐级验证；根据结果调整发售时点、投入和预期 \\
-AI体验增量 & 原型已跑通，用户价值仍需量化 & 对比预制反馈与 AI 记忆反馈，观察角色互动、继续装修意愿、情绪评分和重复启动率 \\
-游戏内AI质量与成本 & 原型已跑通，15 分钟 Demo 的 AI Token 消耗折合人民币不到 0.1 元 & 规则层管理事实与记忆；模型生成受约束短文本；一致性校验，重试，模板降级和模型替换保障稳定性与成本可控 \\
-AI美术合规与口碑 & AI辅助美术资产需符合Steam披露要求，部分玩家对AI内容敏感 & 核心视觉人工创作，AI仅用于数量型资产；上线前完成Steam披露；关注玩家反馈 \\
-断网与服务可用性 & AI 接口不是核心玩法运行前提 & 核心游戏离线运行；断网时使用预制反馈，不阻断探索、装修、任务和进度 \\
-现金流和延期 & 保守销量情景存在资金压力 & 三阶段拨付融资；保留40万元风险储备和14万元管理缓冲；后续内容按经营结果立项 \\
-发行能力 & 全球发行能力处于建设阶段 & 自建商店、社区和数据能力并接触发行商；以资源增量和合作条款筛选伙伴 \\
+公司股权融资 & 公司估值增长、后续融资、分红或股权退出 & 分享《虫虫家装》及后续工作室项目的长期价值 \\
+项目融资/游戏收入分成 & 约定范围内的游戏净收入分成或优先回收 & 回报与项目现金流直接关联，边界可限定 \\
+股权+有限项目权利的Hybrid & 少数股权+有限项目分成/权利 & 同时分享公司长期增值与项目阶段现金回报 \\
 \end{longtable}
 }
 
 \end{BusinessTable}
 
-\section{十、知识产权与南山落地计划}\label{ux5341ux77e5ux8bc6ux4ea7ux6743ux4e0eux5357ux5c71ux843dux5730ux8ba1ux5212}
-
-项目核心玩法代码与美术资产由团队自主开发。团队将在投资协议签署前通过成员协议明确代码、美术、音乐、文本、署名及知识产权归属，并在产品上线前完成软件著作权登记。
-
-本轮300万元融资按协议到位后，团队将项目运营主体迁入南山区，在当地推进研发管理、知识产权、发行结算及产业资源合作。迁入时间、办公安排和配套条件将在投资与孵化协议中明确。
+融资后价值提升路径为：Demo与原型 → 可持续生产的Alpha与南山主体 → 内容完整的Beta和市场信号 → 发售收入、口碑与用户资产 → DLC/平台扩展与下一项目能力。
 
 \section{附录}\label{ux9644ux5f55}
 
 \subsection{附录A：第一期资金安排与验收细则}\label{ux9644ux5f55aux7b2cux4e00ux671fux8d44ux91d1ux5b89ux6392ux4e0eux9a8cux6536ux7ec6ux5219}
 
-\textbf{第一期120万元现金安排}
+\subsubsection{第一期120万元现金安排}\label{ux7b2cux4e00ux671f120ux4e07ux5143ux73b0ux91d1ux5b89ux6392}
 
 \begin{BusinessTable}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4300}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1500}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4200}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3200}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5300}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 用途
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 金额
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 说明
@@ -822,12 +867,12 @@ AI美术合规与口碑 & AI辅助美术资产需符合Steam披露要求，部�
 \bottomrule\noalign{}
 \endlastfoot
 2名核心创始成员9个月薪酬及单位用工成本 & 34.3万元 & 覆盖2026年Q4垂直切片收尾及2027年上半年Alpha生产 \\
-5名阶段成员报酬 & 16万元 & 按交付物、工时和验收节点支付 \\
+6名阶段成员报酬 & 19.2万元 & 按交付物、工时和验收节点支付，覆盖新增美术成员阶段交付 \\
 设备、Unity、软件及云服务 & 15万元 & 配置关键设备与必需授权 \\
 Demo QA、商店素材、宣传片及Steam页面 & 15万元 & 支持公开Demo持续迭代和市场验证 \\
 合同、知识产权、主体及基础运营 & 7万元 & 完善成员、版权和投资关系 \\
-Alpha生产及现金流储备 & 32.7万元 & 覆盖返工及第二期验收期间的连续开发 \\
-\textbf{合计} & \textbf{120万元} & --- \\
+Alpha生产及现金流储备 & 29.5万元 & 覆盖返工及第二期验收期间的连续开发 \\
+合计 & 120万元 & --- \\
 \end{longtable}
 }
 
@@ -835,9 +880,9 @@ Alpha生产及现金流储备 & 32.7万元 & 覆盖返工及第二期验收期�
 
 其余45.7万元核心创始成员用工预算分别覆盖Beta阶段和Gold至首发后维护阶段，按实际投入月份支付并纳入对应批次预算。
 
-第一期验收分两轮：垂直切片验收与第二期启动验收。垂直切片验收要求完成品质收尾与美术风格一致性验收；\textbf{第一期进入第二期}需满足：公开Demo稳定运行并接入Steam商店、愿望单、UTM和行为统计；Alpha完整流程可玩，核心系统完成，家具、地图和角色内容管线通过产能验证；提交外部试玩、商店数据、问题清单和预算执行复盘；锁定Beta首发范围、人员交付和预算。
+第一期验收分两轮：垂直切片验收与第二期启动验收。垂直切片验收要求完成品质收尾与美术风格一致性验收；第一期进入第二期需满足：公开Demo稳定运行并接入Steam商店、愿望单、UTM和行为统计；Alpha完整流程可玩，核心系统完成，家具、地图和角色内容管线通过产能验证；提交外部试玩、商店数据、问题清单和预算执行复盘；锁定Beta首发范围、人员交付和预算。
 
-\textbf{第二期进入第三期}：Beta完成目标15小时、保底6---8小时范围内的核心内容并冻结首发范围；QA、本地化、Gold、发行和首发预算形成可执行计划；提交Demo、愿望单、渠道CAC和玩家反馈报告，并据真实数据决定继续投入、缩减范围或调整发售时点。
+第二期进入第三期：Beta完成目标15小时、保底6---8小时范围内的核心内容并冻结首发范围；QA、本地化、Gold、发行和首发预算形成可执行计划；提交Demo、愿望单、渠道CAC和玩家反馈报告，并据真实数据决定继续投入、缩减范围或调整发售时点。
 
 验收材料包括可玩版本、内容范围与产能报告、预算执行报告以及Steam和Demo数据。各期保留维持关键岗位和必要运维的连续开发资金，未使用资金继续纳入总预算与里程碑管理。
 
@@ -847,13 +892,13 @@ Alpha生产及现金流储备 & 32.7万元 & 覆盖返工及第二期验收期�
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2200}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1800}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.6000}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2400}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5800}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 成本层级
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 金额
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \cellcolor{TableHeader}\color{BrandBlue}\bfseries 覆盖范围
@@ -862,10 +907,10 @@ Alpha生产及现金流储备 & 32.7万元 & 覆盖返工及第二期验收期�
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-本轮新增现金需求 & 300万元 & 2026 Q4---2028 Q2，覆盖垂直切片收尾至首发后3个月，含40万元风险储备和14万元管理缓冲 \\
+本轮新增现金需求 & 300万元 & 2026 Q4---2028 Q2，覆盖垂直切片收尾至首发后3个月，含40万元风险储备和6万元管理缓冲 \\
 首发后基础运营 & 96---146万元/年 & 核心成员维护、阶段人力、QA、云服务、客服、基础运营和经验证的维持性营销 \\
 首发12个月剩余运营 & 72---110万元 & 融资已覆盖首发后前3个月，此处补计其余9个月 \\
-融资启动至首发12个月结束的现金基础 & \textbf{372---410万元} & 300万元新增现金需求＋72---110万元剩余运营 \\
+融资启动至首发12个月结束的现金基础 & 372---410万元 & 300万元新增现金需求+72---110万元剩余运营 \\
 \end{longtable}
 }
 
@@ -873,51 +918,38 @@ Alpha生产及现金流储备 & 32.7万元 & 覆盖返工及第二期验收期�
 
 上线后年度预算中，2名核心创始成员及单位用工成本约46万元，阶段维护与QA 20---30万元，云服务、软件、客服及基础运营10---20万元，维持性营销20---50万元；大型DLC、新平台移植和新增固定成员另行立项。
 
-\begin{itemize}
-\tightlist
-\item
-  \textbf{本轮新增现金覆盖线约5.36万套}：300万元÷56元。
-\item
-  \textbf{税前经营保本区间约6.6---7.3万套}：372---410万元÷56元。
-\item
-  \textbf{审慎经营保本线约8万套}：在上述区间上为税费、客服、服务器和营销波动留出余量。
-\end{itemize}
+本轮新增现金覆盖线约5.36万套：300万元÷56元。
+
+税前经营保本区间约6.6---7.3万套：372---410万元÷56元。
+
+审慎经营保本线约8万套：在上述区间上为税费、客服、服务器和营销波动留出余量。
 
 保守情景按410万元现金基础计算；审慎保本情景另预留约38万元税费及运营波动；基准情景在410万元基础上另预留30万元税费及规模化增量；乐观情景另预留110万元。实际税负由经营主体、可抵扣成本和适用政策确定，投资人回报另按股权比例、分红安排和退出条款测算。
 
 \subsection{附录C：关键数据口径与来源}\label{ux9644ux5f55cux5173ux952eux6570ux636eux53e3ux5f84ux4e0eux6765ux6e90}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  试玩数据来自累计19份有效结构化问卷，样本量较小，结果仅用于判断早期产品方向，不作为市场规模与销量预测依据；下一阶段通过扩大试玩和Steam行为数据验证市场接受度。
-\item
-  SteamData.ai的愿望单、销量和收入为第三方估算，用于判断市场量级；项目转化率采用Steamworks后台数据测算。
-\item
-  愿望单效果通过Steamworks后台的愿望单队列、UTM访问、购买数据及自然增量综合评估。
-\item
-  3万、5万、约8万、15万和30万套分别对应首发12个月的收缩、保守、审慎保本、基准和乐观经营情景，并将随实际数据滚动更新。
-\item
-  27\%单位用工附加为覆盖社保、公积金及基数差异的预算系数，主体设立后以实际核定数替换。
-\item
-  QA、本地化、Unity、设备和增长费用均为规划预算，采购前以正式报价、实际席位和测试结果复核。
-\item
-  5---12元/个可归因愿望单为首轮渠道验证的管理阈值，实际CAC根据Steamworks UTM和总愿望单增量更新。
-\end{enumerate}
+试玩数据来自累计19份有效结构化问卷，样本量较小，结果仅用于判断早期产品方向，不作为市场规模与销量预测依据；下一阶段通过扩大试玩和Steam行为数据验证市场接受度。
 
-主要公开来源：
+SteamData.ai的愿望单、销量和收入为第三方估算，用于判断市场量级；项目转化率采用Steamworks后台数据测算。
 
-\begin{itemize}
-\tightlist
-\item
-  \href{https://steamdata.ai/en-US}{SteamData.ai}：相邻产品愿望单、销量和收入的第三方估算快照，数据整理截至2026年8月18日。
-\item
-  \href{https://partner.steamgames.com/doc/marketing/wishlist/reporting?language=english}{Steamworks Wishlist Reporting}：Steam官方愿望单报告口径。
-\item
-  \href{https://partner.steamgames.com/doc/marketing/utm_analytics?language=english}{Steamworks UTM Analytics}：Steam官方UTM访问与72小时归因说明。
-\item
-  \href{https://unity.com/products/pricing-updates}{Unity官方定价}：Unity工具预算参考。
-\end{itemize}
+愿望单效果通过Steamworks后台的愿望单队列、UTM访问、购买数据及自然增量综合评估。
+
+3万、5万、约8万、15万和30万套分别对应首发12个月的收缩、保守、审慎保本、基准和乐观经营情景，并将随实际数据滚动更新。
+
+27\%单位用工附加为覆盖社保、公积金及基数差异的预算系数，主体设立后以实际核定数替换。
+
+QA、本地化、Unity、设备和增长费用均为规划预算，采购前以正式报价、实际席位和测试结果复核。
+
+5---12元/个可归因愿望单为首轮渠道验证的管理阈值，实际CAC根据Steamworks UTM和总愿望单增量更新。
+
+\subsubsection{主要公开来源}\label{ux4e3bux8981ux516cux5f00ux6765ux6e90}
+
+SteamData.ai：相邻产品愿望单、销量和收入的第三方估算快照，数据整理截至2026年8月18日。
+
+Steamworks Wishlist Reporting：Steam官方愿望单报告口径。
+
+Steamworks UTM Analytics：Steam官方UTM访问与72小时归因说明。
+
+Unity官方定价：Unity工具预算参考。
 
 \end{document}

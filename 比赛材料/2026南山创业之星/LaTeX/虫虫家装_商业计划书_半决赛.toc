@@ -1,0 +1,38 @@
+\contentsline {section}{一、执行摘要：项目概况与投资摘要}{1}{section*.1}%
+\contentsline {subsection}{核心投资看点}{1}{subsection*.2}%
+\contentsline {section}{二、产品与用户价值}{2}{section*.3}%
+\contentsline {subsection}{2.1 产品卖点}{2}{subsection*.4}%
+\contentsline {subsection}{2.2 核心循环}{2}{subsection*.5}%
+\contentsline {subsection}{2.3 长线动力}{2}{subsection*.6}%
+\contentsline {subsection}{2.4 伙伴事件与AI记忆陪伴}{2}{subsection*.7}%
+\contentsline {section}{三、目标用户、市场验证与竞争定位}{3}{section*.8}%
+\contentsline {subsection}{3.1 目标用户}{3}{subsection*.9}%
+\contentsline {subsection}{3.2 用户验证与付费意愿}{3}{subsection*.10}%
+\contentsline {subsection}{3.3 市场机会}{3}{subsection*.11}%
+\contentsline {subsection}{3.4 市场定位与同类产品对标}{4}{subsection*.12}%
+\contentsline {section}{四、团队与执行能力}{4}{section*.13}%
+\contentsline {subsection}{4.1 团队执行基础}{5}{subsection*.14}%
+\contentsline {section}{五、商业模式与市场进入策略}{5}{section*.15}%
+\contentsline {subsection}{5.1 收入模式}{5}{subsection*.16}%
+\contentsline {subsection}{5.2 市场进入路径}{5}{subsection*.17}%
+\contentsline {subsection}{5.3 获客漏斗}{6}{subsection*.18}%
+\contentsline {subsection}{5.4 渠道和增长纪律}{6}{subsection*.19}%
+\contentsline {section}{六、开发、发行与南山落地一体化时间线}{6}{section*.20}%
+\contentsline {subsection}{6.1 首发内容规模与生产原则}{7}{subsection*.21}%
+\contentsline {subsection}{6.2 核心成功指标}{8}{subsection*.22}%
+\contentsline {section}{七、关键挑战、风险控制与合规}{8}{section*.23}%
+\contentsline {subsection}{7.1 关键风险、控制措施与决策门槛}{8}{subsection*.24}%
+\contentsline {section}{八、预算、融资方案与投资回报逻辑}{9}{section*.25}%
+\contentsline {subsection}{8.1 预算与成本结构：钱花在哪里、换来什么}{9}{subsection*.26}%
+\contentsline {subsection}{8.2 资金投入→阶段里程碑→下一阶段价值提升}{9}{subsection*.27}%
+\contentsline {subsection}{8.3 融资方案}{9}{subsection*.28}%
+\contentsline {subsubsection}{8.3.1 基于里程碑的分期拨付参考机制}{10}{subsubsection*.29}%
+\contentsline {subsection}{8.4 首发12个月经营情景}{10}{subsection*.30}%
+\contentsline {subsection}{8.5 投资价值与回报逻辑}{11}{subsection*.31}%
+\contentsline {section}{附录}{12}{section*.32}%
+\contentsline {subsection}{附录A：第一期资金安排与验收细则}{12}{subsection*.33}%
+\contentsline {subsubsection}{第一期120万元现金安排}{12}{subsubsection*.34}%
+\contentsline {subsection}{附录B：经营情景测算口径}{12}{subsection*.35}%
+\contentsline {subsection}{附录C：关键数据口径与来源}{13}{subsection*.36}%
+\contentsline {subsubsection}{主要公开来源}{13}{subsubsection*.37}%
+\contentsfinish 
