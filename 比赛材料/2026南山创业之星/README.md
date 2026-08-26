@@ -46,6 +46,7 @@
 
 - 正文唯一来源：`虫虫家装_商业计划书_半决赛.md`。
 - LaTeX 模板、排版过滤器、构建脚本和输出文件位于 `LaTeX/`。
-- 在 PowerShell 中执行 `./LaTeX/build_business_plan.ps1`，即可重新生成同名 `.tex` 和可直接打印的 `.pdf`。
+- 在 PowerShell 中执行 `./LaTeX/build_business_plan.ps1 -TexOnly`，即可重新生成同名 `.tex`。
+- 在 PowerShell 中执行 `./LaTeX/build_business_plan.ps1`，即可重新生成同名 `.tex` 和可直接打印的 `.pdf`；生成 PDF 需要本机已安装 XeLaTeX/latexmk。
 - 默认构建会清理 `.aux`、`.log` 等中间文件；需要保留排错文件时使用 `./LaTeX/build_business_plan.ps1 -KeepBuildFiles`。
 - PDF 按 A4、双面装订友好的页边距设计；打印时选择“实际大小”或“100%”，不要再次缩放页面。
