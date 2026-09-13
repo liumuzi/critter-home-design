@@ -38,4 +38,4 @@ Suki
 UIUX
 华东师范大学数码艺术本科在读，具备工程逻辑与系统化思维的游戏 UI/UX 设计师，主要负责《虫虫家装》的UIUX部分设计，统筹交互、视觉规范与全流程界面落地。依托标准化交互体系结合家装玩法打造流畅游玩体验，在尝试 AI 辅助优化交互系统，以新技术优化玩家创作操作与沉浸感。
 
-Suki, an undergraduate student of Digital Arts at East China Normal University, is a game UI/UX designer with engineering logic and systematic thinking. As the UI&UX lead of indie game Bug Home Design, she manages full-cycle interface design and interaction. She builds smooth gameplay experience via standardized interaction systems, and currently researches AI interaction systems to improve players’ creation experience.
+Suki, an undergraduate student of Digital Arts at East China Normal University, is a game UI/UX designer with engineering logic and systematic thinking. As the UI&UX lead of indie game Little Bug, Big Home, she manages full-cycle interface design and interaction. She builds smooth gameplay experience via standardized interaction systems, and currently researches AI interaction systems to improve players’ creation experience.
